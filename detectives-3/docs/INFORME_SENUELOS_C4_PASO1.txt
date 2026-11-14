@@ -1,0 +1,27 @@
+INFORME c4 · SUBPASO 1 (LOW, SOLO LECTURA) · 25 oct · receta v7 (GENV=7), 150 casos por nivel, semillas i*7919+1 · `GENV=7 node tools/senuelos_c4.js 150`
+Sostén = pistas de objeto de rol prueba/descarte/refuta · señuelo = pistas de objeto de rol falsa. Herramienta = la de su objeto.
+
+FACIL
+  Sostén (7.2 por caso): lupa 22.7 % · ganzua 10 % · uv 16.8 % · grabadora 10.5 % · sigilo 0 % · libre 40.1 %
+  Señuelos (4.9 por caso): lupa 0 % · ganzua 0 % · uv 0 % · grabadora 0 % · sigilo 10.2 % · libre 89.8 % · casos sin señuelo de grabadora: 150 de 150
+  Charlas grabadas: 0.8 por caso · con pista de sostén 127 · con pista falsa 0 · curiosidad sin pista 0
+  Oli: 53 % en número (40-60) · 49.8 % en tiempo (45-50) · casos fuera de 40-60: 0
+
+NORMAL
+  Sostén (7.5 por caso): lupa 22 % · ganzua 11.1 % · uv 14.8 % · grabadora 11.7 % · sigilo 0 % · libre 40.4 %
+  Señuelos (9.4 por caso): lupa 0 % · ganzua 0 % · uv 0 % · grabadora 0 % · sigilo 6.2 % · libre 93.8 % · casos sin señuelo de grabadora: 150 de 150
+  Charlas grabadas: 1 por caso · con pista de sostén 147 · con pista falsa 0 · curiosidad sin pista 0
+  Oli: 53.9 % en número (40-60) · 49.6 % en tiempo (42-50) · casos fuera de 40-60: 0
+
+DIFICIL
+  Sostén (8 por caso): lupa 22.1 % · ganzua 10.6 % · uv 16.2 % · grabadora 11.6 % · sigilo 0 % · libre 39.5 %
+  Señuelos (11 por caso): lupa 0 % · ganzua 0 % · uv 0 % · grabadora 0 % · sigilo 5.7 % · libre 94.3 % · casos sin señuelo de grabadora: 150 de 150
+  Charlas grabadas: 1 por caso · con pista de sostén 148 · con pista falsa 0 · curiosidad sin pista 0
+  Oli: 53.2 % en número (40-60) · 49.7 % en tiempo (42-50) · casos fuera de 40-60: 0
+
+LECTURA:
+1) Las pistas de sostén piden herramienta en ≈ 60 % (lupa 22 · ganzúa 10-11 · UV 15-17 · grabadora 10-12 · libres ≈ 40 %).
+2) Los señuelos NO piden ninguna herramienta (lupa/ganzúa/UV/grabadora 0 %): solo 6-10 % llevan sigilo y ≈ 90-94 % son libres. Delata cuáles son falsas: si algo pide herramienta, es verdad. Es el hueco que cierra c4.
+3) NINGÚN caso tiene charla grabada falsa (0 de 150 por nivel): toda charla grabada es una prueba real (0,8-1 por caso). Es el hueco de GRAB-2.
+4) El reparto Oli/Lali ya cumple 40-60 en 450 de 450 casos (media 53-54 % en número, ≈ 50 % en tiempo): el balanceador no necesita arreglo, solo mantenerlo al añadir señuelos con herramienta.
+5) Efecto previsible de c4 (NO medido todavía): dar herramienta a parte de los señuelos añade pasos con herramienta, luego minutos (vigilar el techo de 45 en Difícil) y hay que repartirlos entre Oli y Lali para no romper 40-60. Con ~11 señuelos por caso en Difícil, igualar la proporción de sostén (≈ 60 %) serían ~6-7 pasos más; las cifras exactas, en el subpaso 2.

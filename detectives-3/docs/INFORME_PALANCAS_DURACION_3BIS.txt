@@ -1,0 +1,22 @@
+Banco: 32 curiosidades (máx 9 por sala), 5 lugares. Medidor: sala 33.4 s · tema 24.7 s · paso 25.7 s · curiosidad 19.3 s. targetMin actual 23.5 (igual en los 3 niveles).
+
+HOY por nivel (minutos humanos estimados por el medidor; mín/media/máx):
+  facil    n=120 · 20.9/23.5/23.8 min · en banda 100 % · salas 4.1 · sospechosos 6.8 · temas 25.5 · pasos 12.4 · curiosidades 19.2
+  normal   n=120 · 21.7/23.6/24.2 min · en banda 0 % · salas 4.1 · sospechosos 6.8 · temas 26.2 · pasos 13.9 · curiosidades 16.7
+  dificil  n=120 · 22.6/23.6/25 min · en banda 0 % · salas 4.1 · sospechosos 6.8 · temas 27 · pasos 14.8 · curiosidades 14.5
+
+CONTENIDO BASE (sin relleno) por combinación salas × sospechosos (todos los niveles juntos): minutos base y relleno que falta para cada centro de banda:
+  3 salas × 5 sosp. (n=15) · base 13.4 min · techo con 27 curiosidades 22 min · curiosidades para el centro de banda: Fácil 37 · Normal 68 · Difícil 107
+  3 salas × 6 sosp. (n=21) · base 15.8 min · techo con 27 curiosidades 24.5 min · curiosidades para el centro de banda: Fácil 29 · Normal 60 · Difícil 99
+  3 salas × 7 sosp. (n=48) · base 18.5 min · techo con 27 curiosidades 27.2 min · curiosidades para el centro de banda: Fácil 21 · Normal 52 · Difícil 91
+  3 salas × 8 sosp. (n=30) · base 20.1 min · techo con 27 curiosidades 28.8 min · curiosidades para el centro de banda: Fácil 16 · Normal 47 · Difícil 86
+  4 salas × 5 sosp. (n=15) · base 14.7 min · techo con 32 curiosidades 25 min · curiosidades para el centro de banda: Fácil 32 · Normal 64 · Difícil 103
+  4 salas × 6 sosp. (n=30) · base 16.2 min · techo con 32 curiosidades 26.4 min · curiosidades para el centro de banda: Fácil 28 · Normal 59 · Difícil 98
+  4 salas × 7 sosp. (n=33) · base 18.7 min · techo con 32 curiosidades 29 min · curiosidades para el centro de banda: Fácil 20 · Normal 51 · Difícil 90
+  4 salas × 8 sosp. (n=33) · base 20.7 min · techo con 32 curiosidades 31 min · curiosidades para el centro de banda: Fácil 14 · Normal 45 · Difícil 84
+  5 salas × 5 sosp. (n=15) · base 16.1 min · techo con 32 curiosidades 26.3 min · curiosidades para el centro de banda: Fácil 28 · Normal 59 · Difícil 98
+  5 salas × 6 sosp. (n=33) · base 17.7 min · techo con 32 curiosidades 28 min · curiosidades para el centro de banda: Fácil 23 · Normal 54 · Difícil 93
+  5 salas × 7 sosp. (n=60) · base 18.8 min · techo con 32 curiosidades 29.1 min · curiosidades para el centro de banda: Fácil 20 · Normal 51 · Difícil 90
+  5 salas × 8 sosp. (n=27) · base 20.7 min · techo con 32 curiosidades 31 min · curiosidades para el centro de banda: Fácil 14 · Normal 45 · Difícil 84
+
+Informe: /tmp/palancas_duracion.json

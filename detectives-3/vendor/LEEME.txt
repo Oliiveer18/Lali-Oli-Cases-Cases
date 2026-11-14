@@ -1,0 +1,5 @@
+Para quitar la dependencia de los CDN en la versión web (más fiable y sin riesgo de scripts externos):
+1. Descarga peerjs 1.5.4:  https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js
+2. Guárdalo aquí como  vendor/peerjs.min.js
+3. Ejecuta  node build.js
+El build lo detecta solo y lo mete dentro de dist/web/index.html. Si el archivo no está, usa los CDN como antes.

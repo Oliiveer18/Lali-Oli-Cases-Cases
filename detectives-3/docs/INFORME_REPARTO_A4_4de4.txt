@@ -1,0 +1,63 @@
+INFORME DE CIERRE DE A4 4/4 (23 oct, GEN_VERSION 6, v0.7.55) — 300 casos por nivel, semillas i*7919+1
+Generado con: node tools/reparto_herramientas.js 300 · node tools/tiempo_muerto.js 300 · node tools/calidad_niveles.js 60 (calidad de CADA nivel, regla 7)
+
+=== 1. REPARTO DEL TRABAJO CON HERRAMIENTA (EQ-1) Y VOZ ===
+=== Reparto de herramientas · 300 casos generados (0 sin generar), semillas i*7919+1 ===
+Herramienta   pasos   %pasos  segundos  casos con ≥1   dueño
+lupa            283     24%      1104        94%      rex
+ganzua          300     26%       600       100%      rex
+uv              300     26%       600       100%      luna
+grabadora       283     24%      1358        94%      luna
+coop (empujar, 2 detectives): 140 pasos · puertas con herramienta: 0 · objetos con «listen»: 283
+
+TRABAJO OBLIGADO POR DETECTIVE (pasos con herramienta, sin coop):
+  Oli  (rex):  583 pasos · 1704 s
+  Lali (luna): 583 pasos · 1958 s
+  Reparto Oli/Lali: 50/50 en número · 47/53 en tiempo (meta 40-60)
+  Casos con algún detective fuera de 40-60 (número o tiempo): 0 de 300 (0 %)
+
+OBJETOS SIN HERRAMIENTA (todos los objetos visibles con pasos sin tool; NO es la cifra de EQ-6): pistas 3331 · curiosidades 7010 · situaciones 107 · otros 0
+
+PISTAS DE SOSTÉN (denominador de EQ-6: objetos con role prueba, descarte o refuta; sin curiosidades, situaciones, señuelos ni testimonios): 2491 en 300 casos (≈ 8.3 por caso)
+  LIBRES (sin herramienta): 1839 = 74 % (meta ~25 %) · con sigilo (vigilante, sin herramienta): 45 = 2 % · con herramienta: 607 = 24 % (lupa 59, ganzua 140, uv 139, grabadora 269)
+  %libre por caso: mín 33 · mediana 75 · máx 100  (ninguna pista de sostén con herramienta en 5 casos)
+  Aparte (no entran): señuelos con objeto 2132 (1587 libres) · pistas que cuenta un personaje 762 · pistas sin objeto en def 0
+
+POR CAPÍTULO (chapterMin del objeto; 1 si no lo dice):
+  Cap. 1: Oli 300 pasos/600 s · Lali 300 pasos/600 s → 50/50 en número
+  Cap. 2: Oli 283 pasos/1104 s · Lali 283 pasos/1358 s → 50/50 en número
+
+CASO 1 (reservado): Oli 8 pasos/12 s · Lali 3 pasos/5 s · herramientas lupa 6, ganzua 1, uv 2, grabadora 1 · coop 1 · listen 1
+
+%Oli por caso (número): mín 50 · mediana 50 · máx 50
+
+EQ-1 (revisor, banda 40-60 % por detective; G.workIssues): casos que cumplen TODO (caso y capítulos): 300 de 300 (100 %)
+  Caso entero fuera de banda: en número 0 · en tiempo 0 · %Oli mediana: número 50 / tiempo 46
+  cap1: con trabajo en 300 casos · fuera de banda: número 0 · tiempo 0
+  cap2: con trabajo en 283 casos · fuera de banda: número 0 · tiempo 0
+
+VOZ (quién habla en el cartel de cada paso; DESPUÉS de b1): clase → Oli / Lali
+  charla grabada (con herramienta)      0 /    283  (0 % Oli)
+  curiosidad                       3578 /   3432  (51 % Oli)
+  pista (con herramienta)           583 /    300  (66 % Oli)
+  pista (libre)                    1778 /   1693  (51 % Oli)
+  situación                          49 /     58  (46 % Oli)
+
+=== 2. TIEMPOS MUERTOS (EQ-7), medidos con el bot; umbral 240 s de espera seguida y >= 1 accion propia por caso ===
+== Fácil: 300 casos con bot (sin bot 0) · con algún detective SIN acción propia en un capítulo: 11 · incumplen el límite actual (240 s / 1 acción): 0 · espera máx. Oli 189.9 s, Lali 188.8 s
+   cap 1 (298 casos, duración mediana 73.2 s): Oli  acciones propias mediana 4 (mín 0, sin ninguna 3) · espera seguida mediana 22.9 s, p95 50.9 s, máx 71.4 s · % del capítulo: mediana 31 p95 67 máx 100  |  Lali acciones propias mediana 3 (mín 0, sin ninguna 8) · espera seguida mediana 30.1 s, p95 61.8 s, máx 81.1 s · % del capítulo: mediana 42 p95 91 máx 100
+   cap 2 (288 casos, duración mediana 451.2 s): Oli  acciones propias mediana 3 (mín 1, sin ninguna 0) · espera seguida mediana 35.1 s, p95 117.1 s, máx 189.9 s · % del capítulo: mediana 11 p95 33 máx 41  |  Lali acciones propias mediana 3 (mín 1, sin ninguna 0) · espera seguida mediana 32.3 s, p95 123.1 s, máx 188.8 s · % del capítulo: mediana 10 p95 30 máx 37
+== Normal: 300 casos con bot (sin bot 0) · con algún detective SIN acción propia en un capítulo: 2 · incumplen el límite actual (240 s / 1 acción): 0 · espera máx. Oli 207 s, Lali 214.5 s
+   cap 1 (300 casos, duración mediana 89.8 s): Oli  acciones propias mediana 5 (mín 0, sin ninguna 1) · espera seguida mediana 26.2 s, p95 55.5 s, máx 91.3 s · % del capítulo: mediana 29 p95 67 máx 100  |  Lali acciones propias mediana 4 (mín 0, sin ninguna 1) · espera seguida mediana 32.1 s, p95 62.9 s, máx 90.4 s · % del capítulo: mediana 36 p95 76 máx 100
+   cap 2 (284 casos, duración mediana 531.3 s): Oli  acciones propias mediana 3 (mín 1, sin ninguna 0) · espera seguida mediana 61.4 s, p95 166 s, máx 207 s · % del capítulo: mediana 18 p95 32 máx 43  |  Lali acciones propias mediana 3 (mín 1, sin ninguna 0) · espera seguida mediana 56.2 s, p95 180.4 s, máx 214.5 s · % del capítulo: mediana 16 p95 33 máx 39
+== Difícil: 300 casos con bot (sin bot 0) · con algún detective SIN acción propia en un capítulo: 0 · incumplen el límite actual (240 s / 1 acción): 0 · espera máx. Oli 96.4 s, Lali 103.2 s
+   cap 1 (300 casos, duración mediana 104 s): Oli  acciones propias mediana 6 (mín 1, sin ninguna 0) · espera seguida mediana 27.3 s, p95 53.5 s, máx 91.6 s · % del capítulo: mediana 26 p95 49 máx 83  |  Lali acciones propias mediana 5 (mín 1, sin ninguna 0) · espera seguida mediana 34.2 s, p95 66.3 s, máx 103.2 s · % del capítulo: mediana 33 p95 65 máx 95
+   cap 2 (286 casos, duración mediana 571.6 s): Oli  acciones propias mediana 4 (mín 1, sin ninguna 0) · espera seguida mediana 35.1 s, p95 76.8 s, máx 96.4 s · % del capítulo: mediana 7 p95 27 máx 34  |  Lali acciones propias mediana 4 (mín 1, sin ninguna 0) · espera seguida mediana 31.3 s, p95 53.5 s, máx 90.3 s · % del capítulo: mediana 6 p95 24 máx 34
+
+=== 3. CALIDAD POR NIVEL (60 casos por nivel, nota con el bot; la linea «banda 30-40/40-55» de esta herramienta usa las bandas completas de siempre: la escala PROVISIONAL vigente, 20-28 / 22-32 / 24-36, esta en BASELINE.json y da 100 % en los tres) ===
+facil   n 60 · nota 73/82.2/88 (desv 3.8) · intrínseca 71.4 · ajuste 95.5 · aceptados 60/60 · errores 0 · min 21.7/24.7/26.9 · banda 20-30: 100 % dentro · con 100: 0
+        partes {"solid":70,"chap":51.6,"fill":57.9,"walk":72.8,"par":100,"text":69.3,"obj":90.2,"var":93.9,"dur":100,"depth":89.5}
+normal  n 60 · nota 70/78.3/86 (desv 3.8) · intrínseca 70.6 · ajuste 87.8 · aceptados 60/60 · errores 0 · min 26.2/28.7/31.5 · banda 30-40: 10 % dentro · con 100: 0
+        partes {"solid":69.8,"chap":55.4,"fill":52.1,"walk":69,"par":99.9,"text":66.7,"obj":90.7,"var":93.1,"dur":100,"depth":72.7}
+dificil n 60 · nota 69/74.2/79 (desv 2.7) · intrínseca 69.8 · ajuste 79.8 · aceptados 60/60 · errores 0 · min 28.1/31.8/35.9 · banda 40-55: 0 % dentro · con 100: 0
+        partes {"solid":69.6,"chap":58.5,"fill":56,"walk":68.1,"par":99.7,"text":54.6,"obj":88.4,"var":95,"dur":100,"depth":54.5}

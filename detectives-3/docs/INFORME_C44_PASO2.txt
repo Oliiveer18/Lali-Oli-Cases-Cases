@@ -1,0 +1,33 @@
+INFORME · c4-4 · subpaso 2 · BALANCEADOR QUE CORRIGE EL REPARTO (cp. 252, 26 oct)
+===================================================================================
+Decisión del usuario (26 oct): «resuélvelo de la forma más profesional y equilibrada» → A + B juntas; C (engañosos al 60 %) fuera de c4-4.
+Este subpaso hace B. A (16 intentos solo en v7) queda para el subpaso 4, solo si tras medir siguen quedando rechazos. GEN_VERSION 6 · G.VERSION 0.7.60 · v6 IDÉNTICO.
+
+1. Diagnóstico (300 semillas/nivel, 1 intento, interruptor de charla señuelo encendido)
+   - El 100 % de los rechazos de reparto son «Oli por debajo del 40 %» en número (a Lali le sobran pasos): 87 · 52 · 44 (F · N · D). Ninguno por Oli de más.
+   - Casos rechazados típicos: Oli 2-3 pasos frente a Lali 4-6.
+   - El balanceador anterior solo actuaba al revés (Oli > 1,5 × Lali: liberaba lupas), por eso el caso se rechazaba.
+   - Liberando solo UV señuelo de Lali se arreglan 55 · 39 · 28 de esos casos; añadiendo la charla señuelo, 62 · 43 · 34.
+
+2. Cambio (src/compile.js + src/gen_data.js; solo GEN_VERSION >= 7)
+   - Interruptor `herr2.balanceaLali: true`.
+   - Si Oli < 40 % en número, se liberan los k MÍNIMOS UV SEÑUELO (rol `falsa`, nunca cadena ganzúa→UV ni sostén) que dejan a Oli en 40-60 %. Cada una pasa a objeto normal (sin herramienta, con su texto y su pista) en un hueco libre de su sala. Si ningún k basta, no se toca nada.
+   - Azar propio seed ^ 0xc44a02. Después corre el balanceador de tiempo de siempre.
+   - NO se toca la charla señuelo, ni las pistas de sostén, ni la IA de Lali y Oli.
+
+3. Medido (1 intento, 300 semillas por nivel; F · N · D)
+   Rechazos de reparto 87 · 52 · 44 → 32 · 13 · 16. Rechazos totales 116 · 120 · 120 → 61 · 81 · 92.
+   Los que quedan son sobre todo de tiempo y casos tipo 3 Oli / 5 Lali, que solo se arreglarían quitando también la charla señuelo (no se hace; decisión para el subpaso 3/4).
+   Casos aceptados (100/nivel, hasta 8 intentos): reintentos medios 1,19 · 1,32 · 1,52 (antes 1,57 · 1,50 · 1,68); Oli 46,5 · 48,1 · 47,1 % (mín. 40, máx. 60; 0 fuera de banda).
+   Herramientas por caso (F · N · D) frente a su banda: lupa 1,92 · 2,16 · 2,08 (1,7-2,2) · ganzúa 1,03 · 1,16 · 1,19 (1,0-1,5) · UV 1,73 · 1,86 · 1,87 (1,7-2,3; Fácil está pegada al mínimo) · grabadora 1,64 · 1,66 · 1,79 (1,0-2,0). Todas dentro.
+   Comprobación rápida a 40/nivel (palancas_cl5, NO medición final): duración mediana 25,4 · 32,9 · 39 min (máx. 28 · 37,4 · 44,3) · 0 > 45 · 0 atascos · calidad mediana 82 · 79 · 77 (mín. 73 · 73 · 69) · aceptados 40/40.
+
+4. Pruebas (de una en una, verdes)
+   test_balancea_lali NUEVO (7 comprobaciones; 3 mutaciones detectadas: libera cualquier UV · libera una de más · interruptor apagado; el filtro «hay hueco libre» es red de seguridad sin mutación, no se alcanza en 240 semillas) · casos_sin_cambios 60 (v6 IDÉNTICO) · test_compile · test_reparto · test_bible · test_gen_clues · test_grabadora · test_lupa_tope · test_ganzua_c4 · test_uv_c4 100 · test_charla_senuelo_a y _b · test_grab4 · build 820 KB + test_build 14/14.
+   test_refuta_charla ARREGLADA: ahora reconoce la charla base sin velo del último recurso (pareja sin el sujeto, todos los libres en la sala). Salía una (semilla 95029) porque esas semillas antes se rechazaban por reparto y no se veían; el comportamiento (charla base sin velo, documentado en cp. 249) no cambia.
+   NO lanzado: pesadas ni `npm test`.
+
+5. Límites / pendiente
+   - UV de Fácil (1,73) está pegada al mínimo de su banda: vigilar en el subpaso 3.
+   - Casos con 3 Oli / 5 Lali y los de tiempo siguen rechazándose; opciones para el usuario si molesta: liberar también la charla señuelo (más delicado, toca la pareja y las posiciones), o dar un paso más a Oli.
+   - C (engañosos al 60 %, receta CL-5a: 29 · 68 · 76 rechazos por 300) sigue fuera de c4-4 y sin decidir.

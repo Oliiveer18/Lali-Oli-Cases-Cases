@@ -1,0 +1,26 @@
+INFORME c4-3 · CHARLAS SEÑUELO · SUBPASO 1/4 (cp. 240, 25 oct, LOW, SOLO LECTURA). `src/` SIN CAMBIOS · GEN_VERSION 6 (v7 en memoria) · G.VERSION 0.7.60.
+Herramienta NUEVA: tools/senuelos_charla_c43.js (GENV=7 node tools/senuelos_charla_c43.js 150; semillas i*7919+1).
+1) DIVISION DE c4-3 EN 4 SUBPASOS (ZIP y PARAR tras cada uno):
+   1/4 LOW   · medir y diseñar (ESTE informe). Sin tocar src/.
+   2/4 MEDIUM · DATOS: textos de la charla señuelo, plantilla de rastro «grabación» para charlas reales sospechosas (ver §4), tabla `senuelos[nivel].charla` e interruptor `herr2.charlaSenuelos` APAGADO. Casos idénticos.
+   3/4 MEDIUM · CODIGO apagado: gen_clues.js (falsa de objeto -> tipo «grabación», azar propio) y compile.js (monta la charla señuelo con pareja libre y sala sin charla; no entra en el objetivo g2c); pruebas con mutación; v6 IDENTICO.
+   4/4 MEDIUM · ENCENDER, remedir 150/nivel (grabadora en su banda NUEVA, duración ≤ 45, Oli 40-60 %, calidad por nivel, 0 atascos), build, documentos y cierre de c4-3.
+2) BASE MEDIDA (150 casos/nivel, F · N · D):
+   · charlas reales por caso 1,23 · 1,17 · 1,28 (todas con pista; 0 de curiosidad; pasos de grabadora = charlas). Ya NINGUNA charla falsa (GRAB-4 garantiza ≥ 1 real por caso).
+   · falsas de objeto por caso 4,7 · 9,2 · 11,0 (candidatas a charla señuelo: 3,4 · 7,6 · 9,2 están en salas SIN charla real).
+   · casos con pareja libre (2 sospechosos sin gato, sin vigilante y sin charla): 103/150 (69 %) · 126/150 (84 %) · 126/150 (84 %); con falsa en sala sin charla además: 102 · 126 · 126. Tope de factibilidad ≈ 68 % / 84 % / 84 % de los casos (1 charla señuelo como máximo por caso: 2 exigirían 4 sospechosos libres).
+   · una charla dura 4,8 s de grabación; coste de tiempo previsto: bajo (se medirá en 4/4).
+   · hueco de la grabadora: hoy 1,23 · 1,17 · 1,28 pasos/caso frente a la banda 1,0-1,5 → solo cabe +0,2-0,3 por caso dentro de la banda actual.
+3) HALLAZGO IMPORTANTE (tono): TODA charla real con pista es un DESCARTE (la pista viene de la plantilla de descarte «Foto de la cámara»: exculpa a un inocente) y su frase velada es de tono exculpatorio («con X yo no me preocuparía…»). Un señuelo que «suena sospechoso» (lo que pide GRAB-2) tendría el tono contrario → el jugador aprendería «charla que acusa = falsa» y el señuelo no despistaría nada. Hay que dar a las charlas reales también un tono sospechoso: la REFUTACION de la mentira de un mentiroso (rastro «refuta») pasa a poder ser una grabación real («lo que ha contado X no me cuadra…»; el banco velado ya trae el rol `refuta`). Así, entre las charlas reales hay exculpatorias y sospechosas, y el señuelo sospechoso se confunde con la refutación real.
+4) DISEÑO PROPUESTO:
+   · QUE ES un señuelo: una pista FALSA de objeto que ya existe (mismos textos, mismos puntos y mismas `needs` del señuelo de método/móvil) cuya entrega pasa a ser una charla grabada velada de tono sospechoso sobre el inocente al que apunta. Su tipo pasa a «grabación» (mismo icono que las reales; si no, el icono lo delata). No se crean pistas nuevas.
+   · JUSTICIA: no entra en el objetivo «Graba las charlas» (g2c exige solo las reales); no puede ser pista clave ni refutación de nadie (las falsas ya no lo son); nadie se atasca por grabarla o no; el bot y el compañero IA no la persiguen; el sospechoso al que apunta sigue teniendo su descarte.
+   · SALA/PAREJA: sala de la falsa SIN charla real (un rincón de charla por sala) y pareja libre (no gato, no vigilante, no usada); si no hay, no hay señuelo en ese caso. Una sola charla señuelo por caso como máximo.
+   · CIFRA (regla del usuario: rango y pesos por nivel): `senuelos[nivel].charla` = nº de charlas señuelo por caso [[0,p],[1,p]]. Propuesta: Fácil [[0,55],[1,45]] · Normal [[0,45],[1,55]] · Difícil [[0,40],[1,60]]. Con la factibilidad medida saldrían ≈ 0,31 · 0,46 · 0,50 por caso.
+   · GRABADORA TOTAL por caso sería ≈ 1,5 · 1,6 · 1,8 (reales 1,2 + señuelo + la 2.ª real). Con la banda actual 1,0-1,5 casi no cabe: o la banda sube (propuesta 1,0-2,0) o el señuelo queda en ≈ 0,25 por caso y delata (una sola charla = real).
+   · REFUTACION REAL EN CHARLA (tono sospechoso): solo cuando el caso tenga un mentiroso con rastro de objeto libre y sala/pareja libres; ≈ 1 de cada 3 charlas reales; la 1.ª charla real sigue siendo la de siempre (GRAB-4 intacto).
+5) DECISIONES QUE NECESITO ANTES DE 2/4 (no se toca src/ hasta tenerlas):
+   A. Banda de la grabadora: ¿subir de 1,0-1,5 a 1,0-2,0 por caso? (recomendado; Oli seguiría en 40-60 %: hoy 48-51 %, bajaría ≈ 3-4 puntos).
+   B. ¿Doy tono sospechoso a una parte de las charlas REALES (refutación del mentiroso) para que el señuelo no se delate? (recomendado).
+   C. ¿Cifras de la tabla (Fácil 45 % · Normal 55 % · Difícil 60 % de casos con 1 señuelo)? Se miden y registran; sin topes finos hasta el final.
+6) PRUEBAS: solo lectura; v6 y v7 sin tocar. NO lanzado: nada más (no hay cambios).

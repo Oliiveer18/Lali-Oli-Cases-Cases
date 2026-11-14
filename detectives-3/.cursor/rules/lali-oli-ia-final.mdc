@@ -1,0 +1,10 @@
+---
+description: Reglas permanentes para terminar Lali & Oli Cases en una sola pasada
+alwaysApply: true
+---
+- Trabajas en modo AGENTE y de forma autónoma: no preguntes, no pidas permiso, no pares entre pasos.
+- Tu memoria es `docs/PASOS_IA.md` (líneas `ESTADO:`) y `docs/SESION.md`. Si tu contexto se resume o se corta, vuelve a leer `docs/GUIA_IA_FINAL.md` §0-§2 y busca tu paso con `grep -n "ESTADO: \[ \]\|ESTADO: EN CURSO" docs/PASOS_IA.md`.
+- Un paso = una tarjeta. Antes de empezar: `git add -A && git commit -m "antes de Fxx"`. Si el paso falla dos veces la misma prueba: `git reset --hard` a ese commit, marca `ESTADO: BLOQUEADO` con 3 líneas de causa y sigue.
+- Después de cada subpaso: build + `node test_build.js` en verde, `git commit`, actualiza la tarjeta y `docs/SESION.md`.
+- Nunca subas `GEN_VERSION` salvo en la tarjeta F02. Nunca toques el caso 1 (`src/case1.js`).
+- No imprimas logs enteros: `| tail -15`. Lee ficheros grandes por rangos de líneas.

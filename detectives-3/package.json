@@ -1,0 +1,18 @@
+{
+  "name": "lali-oli-cases",
+  "version": "0.7.60",
+  "description": "Lali & Oli Cases · Detectives de lo Absurdo (juego web cooperativo)",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "test": "node test.js",
+    "test:fast": "node test.js --fast",
+    "test:quick": "node test.js --seeds=500",
+    "test:touch": "node test.js --only=touch",
+    "test:online": "node test.js --only=online",
+    "cierre": "node tools/cierre.js",
+    "linea": "node tools/baseline.js --comparar"
+  },
+  "engines": { "node": ">=18" },
+  "license": "UNLICENSED"
+}

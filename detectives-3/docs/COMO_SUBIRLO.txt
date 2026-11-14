@@ -1,0 +1,26 @@
+COMO PUBLICAR LALI & OLI CASES (version web publica)
+
+El archivo index.html es el juego. Hay que subirlo a una web para tener un enlace que abran los dos iPhones.
+
+Opcion rapida desde un ordenador (la mas segura):
+1. Entra en https://app.netlify.com/drop
+2. Arrastra la CARPETA que contiene index.html.
+3. Te da un enlace (algo.netlify.app). Mandalo a tu companero. Si no creas cuenta, el enlace puede caducar: reclama el sitio con un registro gratuito.
+
+Opcion desde el iPhone:
+- tiiny.host permite subir un archivo HTML desde el movil (subir index.html desde Archivos). Los planes gratuitos tienen limites que no he podido comprobar.
+
+Jugar:
+1. Abrid el enlace en Safari. Compartir > "Anadir a pantalla de inicio" para pantalla completa.
+2. Jugar > 2 jugadores online > Elegir caso > dificultad.
+3. Uno pulsa "Crear sala" y da el codigo de 5 letras; el otro "Unirme con codigo" y lo escribe.
+
+IMPORTANTE: sube juntos index.html y sw.js, y actualiza los dos moviles. Si las versiones difieren, el juego avisa y no deja empezar.
+
+---- v0.7.39: JUGAR CADA UNO CON SU INTERNET (datos moviles, sin el mismo wifi) ----
+El juego abre la sala por DOS caminos a la vez:
+ 1. Directo entre moviles (PeerJS/WebRTC, con STUN y TURN publicos).
+ 2. Respaldo por servidores publicos (relay.js): cada movil se conecta por wss (puerto 443/8084/8884/8081) a 4 brokers MQTT gratuitos y los mensajes pasan por ellos. No depende de la operadora ni del NAT de cada movil.
+Si el directo conecta, se usa el directo; si no, o si se cae, sigue el respaldo sin cortes. En la sala de espera se ve «Enlace: directo» o «Enlace: por servidor de respaldo».
+Pasos en la calle: 1) los dos abris el MISMO enlace publico (netlify) en Safari/Chrome con datos moviles; 2) uno «Crear sala» y da el codigo de 5 letras; 3) el otro «Unirme con codigo». 4) Si sale «otra version», cerrad la app del todo y reabrid el enlace (las dos deben decir 0.7.39).
+Aviso: los brokers publicos son gratuitos y ajenos; el codigo de 5 letras es aleatorio y solo se usa para esta partida (no viajan datos personales). Si uno cae, usa los otros tres.

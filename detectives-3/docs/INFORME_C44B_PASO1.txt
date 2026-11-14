@@ -1,0 +1,28 @@
+INFORME · c4b (GRAB-3) · paso 1 · ¿CÓMO REACCIONA HOY UN SOSPECHOSO ANTE UNA GRABACIÓN? (cp. 256, 26 oct) · LOW · SOLO LECTURA, sin cambios en src/
+=================================================================================================================================================
+Muestra: 40 casos por nivel (semillas i*7919+1; GEN_VERSION 7 en memoria). Herramienta nueva: `GENV=7 node tools/grab3_diag_c4b.js [N=40]`. v6 intacto.
+
+1. Cómo funciona hoy (logic.js `present`)
+   - Al enseñar una prueba a un personaje se busca `npcs[id].evidence[idPista]`; si no hay, `evidence['*']`; si no, `evidenceDefault`. La reacción depende SOLO del id de la pista, no de su tipo: una grabación no tiene tratamiento propio.
+   - compile.js (`evid`) solo da frase propia a: el culpable ante la prueba de solución (confiesa), el inocente que miente ante lo que desmonta su mentira (admite) y el sospechoso engañoso ante lo que lo señalaba (explicación tonta). Todo lo demás cae en la negación genérica del personaje.
+
+2. Qué se mide (por 40 casos; Fácil · Normal · Difícil)
+   - Pistas de tipo grabación: 91 · 99 · 128 (2,3 · 2,5 · 3,2 por caso); con charla grabada 64 · 63 · 70, como objeto («Foto de la cámara») 27 · 36 · 58.
+   - Por rol: descarte 61 · 62 · 65 · refuta 19 · 20 · 22 · prueba 9 · 10 · 12 · falsa 2 · 7 · 13 · ambiente 0 · 0 · 16 (sin sujeto).
+   - Pares (grabación, sospechoso al que señala): 91 · 99 · 112. Con frase PROPIA 34 · 42 · 59 (37 % · 42 % · 53 %); con la genérica 57 · 57 · 53 (63 % · 58 % · 47 %).
+   - Los pares genéricos son casi todos DESCARTES (55 · 57 · 50) y alguna falsa: el sospechoso al que una grabación inocente señala responde «¿Eso? ¡No me suena de nada!», «Ni idea.» o «No.».
+   - Ningún texto de reacción nombra la grabación (0 de 0 en los tres niveles): las frases «propias» son las pools de confesión/admisión/explicación reutilizadas.
+
+3. Conclusión (lo que NO estaba comprobado y ahora sí)
+   - Hoy el sospechoso NO reacciona a la grabación como tal. Enseñarle a alguien una grabación en la que se habla de él produce la misma negación genérica que cualquier objeto; en el 47-63 % de los casos (descartes y señuelos) ni siquiera hay frase propia.
+   - Es incoherente con la ficción («no me suena» ante una charla que lo nombra) y desaprovecha la grabadora. NO hay fuga de información hoy: la reacción no distingue verdad de señuelo.
+
+4. Viabilidad de GRAB-3 (paso 2, MEDIUM) SIN tocar la biblia
+   - SÍ cabe: es solo `compile.js` (`evid`) + un banco de frases en `gen_data.js` (solo GEN_VERSION >= 7; v6 idéntico). Se usa la lista de sujetos que ya existe (`c.points`, `lies[].refutedBy`).
+   - Diseño propuesto: para cada pista «grabación» y cada sujeto SIN frase propia (descartes, señuelos), una frase NERVIOSA y graciosa que nombra que le han grabado («¿Me han grabado? Yo solo iba a por un café.»), con 2-3 variantes por tono, sin género ni lugares (como `veil.senuelo`). Las propias de verdad (confesión, admisión, explicación) NO se tocan.
+   - Sin fuga: la frase nerviosa sale igual para descartes y señuelos (misma pool, mismo tono), y no cambia ninguna bandera; no hay mecánica nueva (sin presión extra) salvo que el usuario la pida.
+   - Pruebas previstas: banco de frases (linter de textos, longitud, sin duplicados), cobertura (todo par grabación-sujeto sin propia tiene la nerviosa), «no cambia las propias», mutaciones (no distingue señuelo · pisa la confesión · usa pool de otro tono), v6 IDÉNTICO.
+
+5. Preguntas para el usuario (antes del paso 2)
+   a) ¿Solo texto (recomendado) o también un pequeño efecto (p. ej. +1 de presión)? El efecto sería mecánica nueva.
+   b) ¿La frase nerviosa también para las grabaciones de objeto («Foto de la cámara») o solo para charlas? Recomendado: las dos, porque son del mismo tipo.

@@ -1,0 +1,27 @@
+INFORME c4 · SUBPASO 2b-3 · SEÑUELOS CON GANZÚA Y CADENA DE SEÑUELOS (cp. 232, 25 oct). ESTADO: CERRADO con los señuelos APAGADOS en disco. Receta: GEN_VERSION 6 (v7 en memoria) SIN tocar. Método rápido (METODO_DE_TRABAJO): pruebas del paso + medición.
+
+1) QUÉ SE HIZO (solo v7)
+   - compile.js: bloque «SEÑUELOS CON GANZÚA» (tras los de UV): parte de las pistas FALSAS de documento o física piden la ganzúa (cerradura de su sala), en la cifra por nivel de `herr2.senuelos[nivel].ganzua`. Azar propio (seed ^ 0x9a2c3b). Una cerradura por sala (no coincide con una ganzúa de sostén).
+   - compile.js: bloque «CADENA DE SEÑUELOS»: `senuelos[nivel].cadena` = [[0,10],[1,90]] en los 3 niveles (la cadena real aparece en ≈ 90 % de las ganzúas de sostén; si la falsa saliera menos, «cajón + papel con UV» delataría lo verdadero). Une una ganzúa falsa con una UV falsa de documento (una de señuelo ya puesta, o una falsa de documento con rincón libre). Azar propio (seed ^ 0xc4d3c0). Textos de cadena iguales a los reales.
+   - La cadena REAL ahora excluye las ganzúas falsas (`decoyGz`): nunca real↔falsa (cadenas «mixtas» = 0).
+   - gen_data.js: interruptor `herr2.ganzuaSenuelos` = false (APAGADO en disco) y `cadena` por nivel.
+   - Pruebas: test_ganzua_c4.js NUEVO (21 comprobaciones: apagado = nada; encendido = mínimos por nivel, solo documento/física, una por sala, cadenas nunca mixtas, textos de cadena, bot gana; 3 mutaciones detectadas: dos ganzúas en una sala, cadena real con ganzúa falsa, interruptor encendido en disco). tools/ganzua_c4_2b3.js NUEVO.
+
+2) EFECTO EN LA LUPA Y EN LAS DEMÁS (100 casos por nivel, GEN_VERSION 7, pasos con herramienta por caso, Fácil · Normal · Difícil)
+   variante                        lupa                  ganzúa sostén/señuelo           UV sostén/señuelo          cadenas real/señuelo
+   base (todo apagado)             2,25 · 2,47 · 2,66    0,67/0 · 0,66/0 · 0,74/0        1,40/0 · 1,34/0 · 1,49/0   0,61/0 · 0,62/0 · 0,68/0
+   solo ganzúa de señuelo          2,13 · 2,37 · 2,67    0,66/0,47 · 0,67/0,91 · 0,74/0,97  1,41/0,25 · 1,35/0,60 · 1,49/0,64   0,60/0,25 · 0,63/0,60 · 0,68/0,64
+   ganzúa + UV de señuelo          2,56 · 3,25 · 3,80    0,68/0,45 · 0,70/0,97 · 0,75/1,00  1,40/0,84 · 1,33/1,55 · 1,51/1,96   0,61/0,24 · 0,65/0,56 · 0,69/0,62
+   Conclusión: la ganzúa de señuelo sola NO sube la lupa (el balanceador libera más lupas porque Oli gana pasos). La lupa solo sube cuando se encienden los señuelos UV (Lali gana pasos y se libera menos). Hay que cortar la lupa (2b-4 paso 1) ANTES de encender los UV. Casos sin ganzúa de señuelo: Fácil 53 % · Normal 27 % · Difícil 19 % (cifras por debajo de la tabla por falta de cerraduras libres: no se fuerza).
+   Cadena de señuelo ≈ cadena real en Normal y Difícil (0,60 vs 0,63 · 0,64 vs 0,68); en Fácil 0,25 vs 0,60 (pocas ganzúas falsas, ≤ 1 por caso): MÍNIMO NO IGUALADO, queda ABIERTO para 2b-4 (subir `senuelos.facil.ganzua`; nunca real↔falsa).
+
+3) PRUEBAS DEL PASO (una a una, todas verdes)
+   node --check compile.js y gen_data.js OK · test_ganzua_c4 (21) · test_uv_c4 (36) · test_mech · test_compile · test_reparto (130 + 20 mutaciones) · test_grabadora · test_gen_clues · casos_sin_cambios 60: v6 IDÉNTICO en los 3 niveles. NO lanzadas (método rápido; van al cierre de 2b): test_puzles_cl5c, test_mass, test_filler, test_cl5a, test_quality_spread, test_duracion_puzles, build/test_build (no se tocó pantalla ni dist/). No npm test.
+
+4) MEDICIÓN RÁPIDA (40 por nivel, GENV=7, señuelos APAGADOS = estado entregado; NO medición final)
+   Fácil 22,3–24,5–26,6 · calidad 74/82,8/88 · Normal 25,5–32,5–36,4 · 73/79,7/86 · Difícil 34,3–38,3–42,2 · 72/77,4/84. >45: 0 · atascos 0 · aceptados 40/40. Igual que 2b-2.
+   NO medida la duración con los señuelos encendidos (se mide en 2b-4).
+
+5) ORDEN: el usuario pidió 2b-3 antes que 2b-4 (docs/USO_HERRAMIENTAS.md recomendaba lo contrario). Las bandas propuestas de herramientas siguen sin confirmar.
+
+6) PARA 2b-4: paso 1 tope de lupa por nivel en datos; paso 2 encender `uvSenuelos` y `ganzuaSenuelos` a la vez y subir ganzúa/UV/grabadora; paso 3 remedir ≥ 100 casos/nivel. Abierto: cadena de señuelo en Fácil (0,25 vs 0,60).
