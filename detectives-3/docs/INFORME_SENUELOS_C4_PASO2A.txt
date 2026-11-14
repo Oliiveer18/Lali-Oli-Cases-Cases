@@ -1,0 +1,42 @@
+INFORME c4 · SUBPASO 2a · SEÑUELOS CON LUPA (cp. 228, 25 oct, LOW). Solo medición; receta y balanceador SIN tocar.
+GEN_VERSION 7 (en memoria) · 150 casos por nivel · herramienta: tools/senuelos_c4_balanceador.js (parche en memoria de compile.js; src/ intacto).
+
+1) PRUEBAS (una a una): casos_sin_cambios 60 = v6 IDÉNTICO · test_reparto, test_mech, test_compile, test_grabadora, test_gen_clues, test_cl5a,
+   test_puzles_cl5c, test_filler, test_duracion_puzles, test_quality_spread, test_mass = TODAS en verde (cinco salieron con SIGTERM externo, rc 143,
+   en la primera pasada; repetidas solas pasaron).
+
+2) MEDIDA (palancas_cl5.js 100 base, GENV=7; minutos humanos = bot x 1,7; mín–mediana–máx):
+   Fácil   24,6 (22,3–27,5) · calidad 74/82,5/87 · >45: 0 · atascos 0   (antes de c4: 24,5)
+   Normal  32,4 (27,9–36,4) · calidad 73/79/86   · >45: 0 · atascos 0   (antes: 32,4)
+   Difícil 38,1 (34,4–43,6) · calidad 71/77,7/83 · >45: 0 · atascos 0   (antes: 38,0)
+   Aceptados por nota 100/100 en los tres niveles. Los señuelos con lupa no mueven la duración.
+
+3) HIPÓTESIS DEL BALANCEADOR: CONFIRMADA.
+   nivel    lupas de señuelo asignadas/caso   liberadas por freeLupa/caso   sobreviven/caso   % liberado   casos donde actúa el balanceador
+   Fácil    0,98                              0,58                          0,40              59 %         82 de 150
+   Normal   2,06                              1,43                          0,63              69 %         116 de 150
+   Difícil  2,39                              1,70                          0,69              71 %         122 de 150
+   (además libera lupas de sostén: Fácil 0,54 · Normal 0,35 · Difícil 0,49 por caso)
+   Causa: `lupas = Object.keys(toolOf).filter(lupa)` guarda las lupas por orden de inserción; el bloque c4-2a inserta las de señuelo DESPUÉS de las de
+   sostén, y el bucle hace `freeLupa(lupas.pop())`, así que las primeras en liberarse son las de señuelo. La lupa es de Oli y Oli > 1,5 x Lali
+   ocurre en el 55-81 % de los casos, de modo que casi siempre se libera alguna.
+
+4) PROPUESTA PARA LA SESIÓN MEDIUM DE 2b (NO aplicada; cambiaría la receta):
+   a) Al añadir UV de señuelo (herramienta de Lali) baja la parte de Oli y el balanceador actuará menos: remedir ANTES de tocarlo.
+   b) Si siguen perdiéndose: liberar en el bucle por orden alterno o proporcional (sostén y señuelo a la vez, p. ej. `lupas.sort` por azar propio) en vez de
+      `pop()` a secas; o liberar primero las de sostén que sobren por encima de la cuota; o subir la cantidad pedida en `senuelos.lupa` para compensar.
+   c) Medir con esta misma herramienta (sobreviven/caso y % de señuelos con lupa en senuelos_c4.js, objetivo 20-22 %). Cualquier cambio exige GEN_VERSION nueva
+      o seguir bajo la 7 (aún no publicada) y permiso del usuario.
+
+5) REPARTO DE HERRAMIENTAS Y PETICIÓN DEL USUARIO (25 oct, medido aparte con 100 casos por nivel, GEN_VERSION 7; pasos con herramienta por caso):
+   nivel    Oli: lupa  ganzúa | Lali: UV  grabadora | total Oli  total Lali
+   Fácil    2,0        0,7    | 1,2      0,8        | 2,7        2,1
+   Normal   2,2        0,7    | 1,1      1,0        | 2,9        2,1
+   Difícil  2,3        0,8    | 1,2      1,1        | 3,1        2,3
+   El usuario pide que Lali use MÁS la linterna UV, de forma profesional (que sirva para algo y esté bien hecha). Diseño propuesto para 2b (NO aplicado):
+   - subir las pistas de sostén con UV (≈ 1,2 → ≈ 2 por caso) y los señuelos con UV (ya en `senuelos.uv`);
+   - que la UV revele algo con peso (tinta invisible, mancha, firma o fecha alterada, documento falsificado), con gesto de pasar la luz y textos propios por tipo;
+   - mantener la cadena ganzúa (Oli) → UV (Lali);
+   - efecto secundario esperado: Oli baja de ≈ 56 % a ≈ 50 % y el balanceador libera menos lupas (ayuda a los señuelos con lupa).
+   Divisón de 2b: 2b-1 más UV de sostén · 2b-2 señuelos UV · 2b-3 señuelos ganzúa + cadena · 2b-4 remedir y decidir freeLupa · 2b-5 mutación y remedir (LOW).
+

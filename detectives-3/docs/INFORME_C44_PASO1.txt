@@ -1,0 +1,26 @@
+INFORME · c4-4 · subpaso 1/? · DIAGNÓSTICO de rechazos y semilla difícil 443465 (cp. 251, 26 oct)
+=====================================================================================
+Decisión del usuario (26 oct): (1) Fácil queda con la charla señuelo en ≈ 18 % (no se sube la tabla). (2) La semilla 443465 se revisa ahora, en c4-4.
+Sin cambios en src/ · GEN_VERSION 6 · G.VERSION 0.7.60.
+
+1. Semilla difícil 443465 (v7)
+   - Falla igual con `charlaSenuelos` encendido y apagado: NO es culpa de las charlas señuelo.
+   - Sus 8 intentos: 6 rechazos de la biblia («enganosos»: un engañoso suma 12 puntos y el culpable 21; hace falta ≥ 60 % → 12,6) y 2 del revisor (equidad / reparto_caso).
+   - No es una semilla rota: es la cola de una tasa de rechazo alta. Con 16 intentos da caso (en el intento 10, código G7-13y55z6).
+   - En 300 semillas de Difícil (v7, interruptor encendido): 180 aceptadas a la 1.ª, 65 a la 2.ª, 30 a la 3.ª, 16 a la 4.ª, 4 a la 5.ª, 3 a la 6.ª, 1 a la 7.ª y 1 sin caso en 8 (≈ 0,3 %).
+
+2. Rechazo en el 1.er intento (300 semillas por nivel; GEN_MAX_ATTEMPTS = 1)
+                       Fácil           Normal          Difícil
+   v6                  6 %             1 %             0 %
+   v7 interruptor OFF  31 % (eq 64, en 29)   33 % (eq 30, en 68)   35 % (eq 28, en 76)
+   v7 interruptor ON   39 % (eq 87, en 29)   40 % (eq 52, en 68)   40 % (eq 44, en 76)
+   (eq = revisor «equidad»: reparto Oli/Lali 40-60 % por caso; en = biblia «enganosos»: el engañoso debe llegar al 60 % de los puntos del culpable.)
+   Lectura:
+   a) El grueso viene de v7 y NO del interruptor: los rechazos por engañosos (29 · 68 · 76) son idénticos con el interruptor apagado y encendido (receta CL-5a: Normal 2-3 engañosos, Difícil 3).
+   b) El interruptor añade rechazos de REPARTO: +23 · +22 · +16 por cada 300 (≈ +7,7 · +7,3 · +5,3 puntos porcentuales): la charla señuelo añade un paso de Lali y descuadra el 40-60 % de Oli. Esto es lo que c4-4 debe atacar.
+   c) Efecto práctico: más reintentos (media 1,5-1,7), no casos peores: lo aceptado sale en banda (informe PASO4).
+
+3. Opciones (NO aplicadas, decide el usuario)
+   A) `GEN_MAX_ATTEMPTS` 8 → 16 solo con GEN_VERSION >= 7 (v6 intacto): rescata 443465 y la cola; coste = algo más de tiempo en casos raros. Cambio de 1 línea en compile.js.
+   B) c4-4 propiamente: que el balanceador CORRIJA el reparto (p. ej. mover un paso de herramienta entre Oli y Lali) en vez de rechazar el caso; baja los rechazos de reparto (la parte b).
+   C) Revisar los «engañosos» al 60 % (parte a, 29-76 rechazos por 300): fuera del alcance de c4-4, afecta a la receta CL-5a.

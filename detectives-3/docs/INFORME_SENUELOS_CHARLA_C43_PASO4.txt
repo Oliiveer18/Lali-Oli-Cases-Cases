@@ -1,0 +1,48 @@
+INFORME · c4-3 4/4 · charla señuelo ENCENDIDA (cp. 250, 26 oct)
+==============================================================
+Cambio en src/: UN solo cambio, gen_data.js `herr2.charlaSenuelos` false → TRUE (GEN_VERSION >= 7).
+GEN_VERSION sigue en 6 (v6 IDÉNTICO) · G.VERSION 0.7.60 · la IA de Lali y Oli NO se toca (H47b-H47e).
+
+1. Medición con el interruptor encendido · 150 casos por nivel (Fácil · Normal · Difícil)
+   Herramienta   Fácil   Normal  Difícil   Banda oficial   Resultado
+   Lupa          1,93    2,18    2,09      1,7 - 2,2       en banda
+   Ganzúa        1,25    1,22    1,30      1,0 - 1,5       en banda
+   UV            1,92    2,07    1,93      1,7 - 2,3       en banda
+   Grabadora     1,52    1,57    1,75      1,0 - 2,0       en banda
+   Oli (reparto) 48,1 %  48,3 %  48,0 %    40 - 60 %       en banda
+   Atascos: 0 · ninguna partida > 45 min.
+   Duración mediana (rango, min): 25,5 (22,7-28) · 33 (27,3-37,4) · 38,9 (35,6-44,3)
+   Calidad mediana (mínima):      82 (73) · 79 (73) · 77 (69)
+   Ninguna herramienta abusiva: la lupa queda a ≤ 2,2 y ganzúa, UV y grabadora suben (equilibradas, no iguales).
+
+2. Charlas señuelo montadas (150 casos por nivel)
+   Fácil 27/150 (18 %) · Normal 45/150 (30 %) · Difícil 60/150 (40 %)
+   Tabla de diseño: 45 / 55 / 60 %. Techo de factibilidad medido: ≈ 31 / 46 / 50 %.
+   → Normal y Difícil quedan cerca del techo; Fácil monta menos de la mitad de lo que dice la tabla.
+   PENDIENTE DE DECIDIR CON EL USUARIO (no decidido): ¿subir la tabla de Fácil, faltan parejas libres, o se deja así?
+
+3. Pruebas de este cierre (de una en una)
+   - test_charla_senuelo_a: VERDE (9 comprobaciones; «apagado» = parche en memoria MOFF).
+   - test_uv_c4 100: VERDE (40 comprobaciones). UV de sostén (100 casos, medido aparte con señuelos de UV/ganzúa apagados,
+     como hace la prueba): 1,17 · 1,16 · 1,24 (suelo 1,1; antes 1,33 · 1,28 · 1,48: la refutación en charla quita ≈ 0,1-0,15).
+     La banda oficial 1,7-2,3 se cumple sobre el total (tabla 1).
+   - node tools/casos_sin_cambios.js 60: v6 IDÉNTICO (60 casos por nivel, 0 cambian).
+   - node tools/baseline.js --comparar: IDÉNTICO (60/nivel; notas 73/82,2/88 · 70/78,3/86 · 69/74,3/79; 100 % en banda;
+     4995 huellas distintas de 5000). BASELINE.json NO se reescribe.
+   - build.js: dist/index.html 818 KB · 23 módulos · test_build 14/14.
+   - Verdes de la sesión anterior (interruptor encendido): test_charla_datos, test_charla_senuelo_b, test_refuta_charla,
+     test_lupa_tope, test_ganzua_c4, test_gen_clues, test_bible, test_grabadora, test_mech, test_compile,
+     test_reparto (130 + 20 mutaciones), test_grab4 (13 + 3 mutaciones).
+   NO lanzado: pesadas ni npm test (método de trabajo).
+
+4. Arreglos de pruebas hechos al encender
+   - test_charla_datos: `ok` tenía los argumentos al revés (nunca fallaba) y un regex de pronombres con falsos positivos (lo/las); arreglado, exige interruptor ENCENDIDO.
+   - test_charla_senuelo_a: «apagado» pasa a ser el parche en memoria MOFF (true→false).
+   - test_grab4: la charla señuelo (rol falsa) no cuenta como charla con pista real; las mutaciones se miden con el interruptor apagado.
+   - test_uv_c4: suelo de UV de sostén 1,2 → 1,1.
+
+5. Abierto (para el usuario)
+   a) Fácil monta la charla señuelo en ≈ 18 % (tabla 45 %): subir la tabla / faltan parejas libres / dejar así.
+   b) Semilla difícil 443465 (KNOWN_ERR en test_grab4 y test_charla_senuelo_a): v7 la rechaza; revisar ahora o en c4-4.
+   c) Riesgo aceptado (cp. 245): la IA de Lali puede ir sola a la charla señuelo; se cierra en H47c.
+   d) c4-4: el revisor rechaza más semillas con el interruptor (reintentos Fácil 1,45→1,57 · Normal 1,42→1,50 · Difícil 1,53→1,68).

@@ -1,0 +1,25 @@
+INFORME · c4-4 · subpaso 3 · MEDICIÓN con el balanceador de Lali (cp. 253, 26 oct) · SOLO LECTURA, sin cambios en src/
+=====================================================================================================================
+Muestra: 300 casos por nivel (semillas i*7919+1) para duración, calidad, herramientas, reparto y rechazos; 3000 semillas por nivel para la cola sin caso. GEN_VERSION 7 en memoria (v6 intacto).
+
+1. Resultados por nivel (F · N · D)
+   Duración (min humanos): mediana 25,4 · 33 · 39 · rango 22,7-28,6 · 27,3-38,9 · 35,6-44,3 · p90 26,9 · 35,1 · 41 · casos > 45: 0 · 0 · 0 · atascos 0 · 0 · 0 · aceptados 300/300 en los tres.
+   Calidad (mín/media/máx; mediana): 73/81,7/90 (82) · 73/78,9/87 (79) · 66/76,7/85 (77).
+   Herramientas por caso (banda): lupa 1,87 · 2,14 · 2,06 (1,7-2,2) · ganzúa 1,12 · 1,16 · 1,21 (1,0-1,5) · UV 1,74 · 1,91 · 1,88 (1,7-2,3) · grabadora 1,59 · 1,66 · 1,82 (1,0-2,0). TODAS dentro de banda.
+   Reparto Oli: 47,2 · 47,6 · 47,0 % (mín. 40, máx. 60; 0 casos fuera de 40-60 en cada nivel).
+   Reintentos medios hasta aceptar: 1,24 · 1,33 · 1,46 (antes de c4-4 · 2: 1,57 · 1,50 · 1,68).
+
+2. Rechazos en el 1.er intento (300 semillas por nivel)
+   Reparto: 87 · 52 · 44 → 32 · 13 · 16. Totales: 116 · 120 · 120 → 61 · 81 · 92 (el resto son los «engañosos» de la receta CL-5a: 29 · 68 · 76, opción C, fuera de c4-4).
+   Lo que queda de reparto es por TIEMPO (23 · 11 · 10 de ellos también fallan en tiempo) y casos tipo 3 Oli / 5 Lali.
+
+3. Cola sin caso (8 intentos): 0 de 3000 semillas en cada nivel. La semilla difícil 443465, que antes no daba caso, ahora lo da, pero en el 8.º y último intento (G7-n6hogw): margen mínimo.
+
+4. Puntos a vigilar
+   - UV de Fácil 1,74: a 0,04 del mínimo de su banda (1,7).
+   - Calidad mínima de Difícil 66 (con 150 casos salió 69): sin umbral oficial, pero es lo más bajo de los tres niveles.
+   - 443465 depende de llegar al 8.º intento.
+
+5. Recomendación para el subpaso 4 (decide el usuario): la subida a 16 intentos (A) ya no es necesaria para rescatar semillas (0 de 9000 perdidas), solo da margen a 443465 y a la cola; coste = 1 línea y algo más de tiempo en casos raros. Propongo hacerla como seguro (LOW), porque «semilla sin caso» sería un fallo visible para el jugador.
+
+6. Herramientas guardadas (cp. 255, solo lectura, GEN_VERSION 7 en memoria): `node tools/reparto_direccion_c44.js [N=300]` (dirección de los rechazos de reparto con 1 intento) y `node tools/bandas_c44.js [N=100]` (herramientas por caso, Oli, reintentos y casos sin caso por nivel).

@@ -1,0 +1,677 @@
+{
+ "version": 1,
+ "verdes": {
+  "tools/baseline.js@--comparar": {
+   "huella": "8bf9289b341d067138f837ea2cf66f6fc64c63b8",
+   "cuando": "2026-10-25T00:06:09.326Z",
+   "seg": 131.6,
+   "ultima": "RESULTADO: IDÉNTICO a la línea base (no hace falta regenerarla).",
+   "tras": false
+  },
+  "test_bible.js": {
+   "huella": "c155ddd5cc6fdb978ab6e25b98c63df11996d377",
+   "cuando": "2026-10-29T17:45:50.701Z",
+   "seg": 0.1,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_gen_truth.js": {
+   "huella": "b16c2454ad792af45a7091e127dfe486fc46be18",
+   "cuando": "2026-10-29T17:45:53.156Z",
+   "seg": 2.4,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_compile.js": {
+   "huella": "4146f946f00561eed0c294d2030cd460f548ff9d",
+   "cuando": "2026-10-29T17:48:01.224Z",
+   "seg": 22,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_rooms.js": {
+   "huella": "cdc246496a7df0e91202d6b4c8df1ffc64e3b8fb",
+   "cuando": "2026-10-29T18:04:58.932Z",
+   "seg": 142.2,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_despacho.js": {
+   "huella": "40b15405288ab3ce3fa1a305a8dc9a153a351f8f",
+   "cuando": "2026-10-29T18:05:00.474Z",
+   "seg": 1.5,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_build.js": {
+   "huella": "ce7591f56d38b6fca3c54cdd0ed89e7e497bd84e",
+   "cuando": "2026-10-29T17:45:47.440Z",
+   "seg": 0.1,
+   "ultima": "Construcción: 14 comprobaciones OK",
+   "tras": false
+  },
+  "test.js@--jobs=1@--only=Validar casos": {
+   "huella": "cd77d23728f1c005203a51e76e36ecd5e5cb2596",
+   "cuando": "2026-10-24T02:13:29.036Z",
+   "seg": 0.6,
+   "ultima": "(1 s · 1 en paralelo)",
+   "tras": false
+  },
+  "test_validate.js@core.js@sprites_a.js@sprites_b.js@sprites_c.js@ui.js@case1.js@logic.js@schema.js": {
+   "huella": "47e98512c1f3400ab7d96925c15fcef5b6527f55",
+   "cuando": "2026-10-29T17:45:48.000Z",
+   "seg": 0.6,
+   "ultima": "OK · el caso 1 pasa el formato sin errores ni avisos",
+   "tras": false
+  },
+  "test_review.js@core.js@sprites_a.js@sprites_b.js@sprites_c.js@ui.js@case1.js@logic.js@schema.js@review.js": {
+   "huella": "ce76fdd4b6b36ea6bd2003e1d42f1c87b45fcd3b",
+   "cuando": "2026-10-29T17:45:48.211Z",
+   "seg": 0.2,
+   "ultima": "OK · varios fallos juntos nunca bajan de 0",
+   "tras": false
+  },
+  "test_bot.js@core.js@sprites_a.js@sprites_b.js@sprites_c.js@ui.js@case1.js@logic.js@schema.js@review.js@world.js@companion.js@bot.js": {
+   "huella": "5023d48ea565be82344f2cb9e44600ff03a3d609",
+   "cuando": "2026-10-29T17:45:48.924Z",
+   "seg": 0.7,
+   "ultima": "OK · lo que no es un caso no revienta el bot",
+   "tras": false
+  },
+  "test_quality.js@core.js@sprites_a.js@sprites_b.js@sprites_c.js@ui.js@case1.js@logic.js@schema.js@review.js@world.js@companion.js@bot.js@quality.js": {
+   "huella": "cf6d6335597d08497c99d5bedf9dfb3836a1ab17",
+   "cuando": "2026-10-29T17:45:50.559Z",
+   "seg": 1.6,
+   "ultima": "OK · el caso original no se modifica",
+   "tras": false
+  },
+  "test_looks.js": {
+   "huella": "66721d59aff1da10394304edc7a9c6de03c642c6",
+   "cuando": "2026-10-29T17:46:04.932Z",
+   "seg": 11.7,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_voice.js": {
+   "huella": "f649c1dfb2c704dc44906dced680a359f75482cf",
+   "cuando": "2026-10-29T17:46:45.947Z",
+   "seg": 41,
+   "ultima": "✓ voz y tono: todo en orden",
+   "tras": false
+  },
+  "test_gen_clues.js": {
+   "huella": "b92cf192c72c407c06f83c063b6804ad14ed6aa8",
+   "cuando": "2026-10-29T17:47:08.639Z",
+   "seg": 22.7,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_themes.js": {
+   "huella": "7c574a8ce423cb63f67ac0a6af5be38c92895a3e",
+   "cuando": "2026-10-29T17:48:01.555Z",
+   "seg": 0.3,
+   "ultima": "test_themes: 26 comprobaciones OK (9 mutaciones detectadas)",
+   "tras": false
+  },
+  "test_marco.js": {
+   "huella": "1ef255ed8ecdde45c21abee5bfb127b99165dcfb",
+   "cuando": "2026-10-29T17:48:24.556Z",
+   "seg": 23,
+   "ultima": "test_marco: 46 comprobaciones OK (5 mutaciones detectadas)",
+   "tras": false
+  },
+  "test_monedas.js": {
+   "huella": "bb151b5e1e4b0854866ed6064873f14887dfbd6a",
+   "cuando": "2026-10-29T17:48:38.799Z",
+   "seg": 14.2,
+   "ultima": "TODO OK (9 comprobaciones)",
+   "tras": false
+  },
+  "test_fingerprint.js": {
+   "huella": "cc7ff60287b0563d681fa719612bd93e5713453d",
+   "cuando": "2026-10-29T17:52:18.631Z",
+   "seg": 219.8,
+   "ultima": "✓ huella de caso: 79 comprobaciones correctas",
+   "tras": false
+  },
+  "test_duracion.js": {
+   "huella": "ba1b0c0465f692b78feb97ef62841c4b6ff2ef7a",
+   "cuando": "2026-10-29T17:53:08.520Z",
+   "seg": 49.9,
+   "ultima": "✓ duración por nivel: 28 comprobaciones correctas",
+   "tras": false
+  },
+  "test_reparto.js": {
+   "huella": "67ecc4fba412668b6d4dff773375eeaad10c0d5a",
+   "cuando": "2026-10-29T17:56:02.576Z",
+   "seg": 174,
+   "ultima": "✓ reparto de trabajo: 130 comprobaciones correctas y 20 mutaciones del código detectadas",
+   "tras": false
+  },
+  "test_tiempo_muerto.js": {
+   "huella": "d0ea4d712df0c9fef2476486f143e15780754ce9",
+   "cuando": "2026-10-29T17:56:45.054Z",
+   "seg": 42.4,
+   "ultima": "✓ tiempos muertos (EQ-7): 162 comprobaciones en v6 y 162 en v7 correctas y 13 mutaciones del código detectadas",
+   "tras": false
+  },
+  "test_mood.js": {
+   "huella": "20f0e8866cc3371ac2b0cccb37aa797ab0be2563",
+   "cuando": "2026-10-29T17:57:09.985Z",
+   "seg": 24.9,
+   "ultima": "✓ ambientes: todo en orden",
+   "tras": false
+  },
+  "test_atmos.js": {
+   "huella": "0c9c6367a23b37e5d29e88cb4e6f97b0f03bd46c",
+   "cuando": "2026-10-29T17:57:29.711Z",
+   "seg": 19.7,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_macabro.js": {
+   "huella": "13502423c63060fb2908579fee54981990568de7",
+   "cuando": "2026-10-29T18:00:01.622Z",
+   "seg": 151.9,
+   "ultima": "✓ situaciones macabras y giro: todo en orden",
+   "tras": false
+  },
+  "test_meter.js": {
+   "huella": "181d86ae34232b5cdeacca8db2fcd55c53746d63",
+   "cuando": "2026-10-29T18:00:56.332Z",
+   "seg": 54.7,
+   "ultima": "TODO OK",
+   "tras": false
+  },
+  "test_quality_spread.js": {
+   "huella": "7a730d425ee0fbee44851cd5ae4b0376c3de7822",
+   "cuando": "2026-10-29T18:01:23.201Z",
+   "seg": 13.5,
+   "ultima": "OK · [dificil] todas las pistas del mismo tipo → baja «var»",
+   "tras": false
+  },
+  "test_filler.js": {
+   "huella": "eff8214d17b5ea9f3fe2c73c51ba5034f25d4f7e",
+   "cuando": "2026-10-29T18:02:36.679Z",
+   "seg": 73.5,
+   "ultima": "TODO OK",
+   "tras": false
+  },
+  "test_iconos.js": {
+   "huella": "a423818abea10d7300234ffda7ee5919a055b1c5",
+   "cuando": "2026-10-29T18:05:02.301Z",
+   "seg": 1.8,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_mech.js": {
+   "huella": "7f644d063a393efb3d0676994023fb7e0c79de3d",
+   "cuando": "2026-10-29T18:08:54.485Z",
+   "seg": 232.2,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_watcher.js": {
+   "huella": "555ab7ef84ac2b44092541293723b8b74cb05ff0",
+   "cuando": "2026-10-29T18:08:57.134Z",
+   "seg": 2.6,
+   "ultima": "Vigilante y textos por datos: 42 comprobaciones OK",
+   "tras": false
+  },
+  "test_grabadora.js": {
+   "huella": "4f494be5659b20a4d23fb4ad1f975473559da16b",
+   "cuando": "2026-10-29T18:09:02.649Z",
+   "seg": 5.5,
+   "ultima": "Grabadora en orden: formato, validador, mundo, caso 1 y 9 mutaciones detectadas.",
+   "tras": false
+  },
+  "test_g2c.js": {
+   "huella": "aa72cd03ba8067439042843281f79789a4b063b2",
+   "cuando": "2026-10-29T18:09:33.583Z",
+   "seg": 30.9,
+   "ultima": "test_g2c: OK",
+   "tras": false
+  },
+  "test_charlas.js": {
+   "huella": "8a5a21e6f2d842474cf2ee8dfd9617fa3aefb6c8",
+   "cuando": "2026-10-29T18:13:22.075Z",
+   "seg": 228.5,
+   "ultima": "Charlas en orden: casos generados, capítulos 1-3, A* real, zona y hueco libres, mundo, bot y mutaciones detect",
+   "tras": false
+  },
+  "test_companion.js": {
+   "huella": "649cb0d1e5d2ddb44a89985e4099df5dc0271c84",
+   "cuando": "2026-10-29T18:17:00.494Z",
+   "seg": 218.4,
+   "ultima": "Compañero IA en orden: avisos, candidatos, decisiones, partidas simuladas en 3 niveles, determinismo y 22 muta",
+   "tras": false
+  },
+  "test_police.js": {
+   "huella": "5318a0b52a5a27bb2645d220cbec1ad291423793",
+   "cuando": "2026-10-29T18:17:09.466Z",
+   "seg": 8.9,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_anim.js": {
+   "huella": "83b0175b600531d8db54b1bb3a2868709b723d81",
+   "cuando": "2026-10-29T18:17:19.066Z",
+   "seg": 9.6,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_ally.js": {
+   "huella": "197eb9f97ddcdf636066caa101f6a4b15506df67",
+   "cuando": "2026-10-29T20:33:46.049Z",
+   "seg": 91.4,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_logic.js": {
+   "huella": "4a9a812f215abf0ba1474d448e72076aeea50b8b",
+   "cuando": "2026-10-29T20:34:18.131Z",
+   "seg": 32.1,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_accuse.js": {
+   "huella": "94f3ef1dc3c39567eb43c822b040db780384c1f0",
+   "cuando": "2026-10-29T20:34:25.994Z",
+   "seg": 7.9,
+   "ultima": "comprobaciones 2154 · fallos 0",
+   "tras": false
+  },
+  "test_bubble.js": {
+   "huella": "90f47fac5f7cd2652ade9da502858000748c1d23",
+   "cuando": "2026-10-29T20:53:39.047Z",
+   "seg": 0.5,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_textfit.js": {
+   "huella": "0256b0c41933cb46427acda432f70e75601a9913",
+   "cuando": "2026-10-29T20:53:40.532Z",
+   "seg": 1.5,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_menuscroll.js": {
+   "huella": "c6b149bb864524cc8b2eaa53f8d244d6ed41b740",
+   "cuando": "2026-10-29T20:53:40.598Z",
+   "seg": 0.1,
+   "ultima": "MENÚ CON DESPLAZAMIENTO: 686 comprobaciones, 0 fallos",
+   "tras": false
+  },
+  "test_menutexto.js": {
+   "huella": "82bc31d18dc3ce6214a39eee2155880c4c8d97dd",
+   "cuando": "2026-10-29T20:53:42.077Z",
+   "seg": 1.5,
+   "ultima": "Textos de menú sin pisarse ni salirse: 12587 comprobaciones, 0 fallos (1802 filas reales de 60 casos; motivo m",
+   "tras": false
+  },
+  "test_sospechosos.js": {
+   "huella": "42d3436eaa42ee68d161bc9a3f43dbf6d41b8948",
+   "cuando": "2026-10-29T20:53:48.144Z",
+   "seg": 6,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_mostrar_prueba.js": {
+   "huella": "dc651068ae375fac777ca46ea436cffc1b295a54",
+   "cuando": "2026-10-29T20:53:48.235Z",
+   "seg": 0.1,
+   "ultima": "Mostrar prueba con botón: flujo, ficha y botones dentro de la pantalla, con 2 mutaciones detectadas",
+   "tras": false
+  },
+  "test_acusar_fallo.js": {
+   "huella": "1b3c2be38be7d346068381eb0447ce4c1ff7068b",
+   "cuando": "2026-11-14T01:46:45.706Z",
+   "seg": 3.1,
+   "ultima": "Acusación fallada visible en Acusar y compartida entre dos jugadores: OK, con 4 mutaciones detectadas",
+   "tras": false
+  },
+  "test_mass.js": {
+   "huella": "f3110c4491ed0ccc02b8e95b40c9cba69c5fdfcd",
+   "cuando": "2026-10-29T20:59:56.223Z",
+   "seg": 115.8,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_relay.js": {
+   "huella": "0c78d48718532e80cae59b1db0c08354ec1c6e3d",
+   "cuando": "2026-10-29T20:59:56.251Z",
+   "seg": 0,
+   "ultima": "SALTADO: falta el módulo ws (npm i ws)",
+   "tras": false
+  },
+  "tools/unit_test.js": {
+   "huella": "4896d9da0dd27f3d06111417fdc787727268033d",
+   "cuando": "2026-10-29T20:59:56.338Z",
+   "seg": 0.1,
+   "ultima": "  ok  comprobador de formato: lo que no es un caso se rechaza sin reventar",
+   "tras": false
+  },
+  "test_testimonios.js": {
+   "huella": "47cce732767725f899bc242bed12ff864e3dab5f",
+   "cuando": "2026-10-29T17:47:19.554Z",
+   "seg": 10.9,
+   "ultima": "test_testimonios: OK",
+   "tras": false
+  },
+  "test_reparto_niveles.js": {
+   "huella": "33173951c17610d79b5871382b6681e9ac2f77c0",
+   "cuando": "2026-10-29T17:47:27.281Z",
+   "seg": 7.7,
+   "ultima": "test_reparto_niveles: OK",
+   "tras": false
+  },
+  "test_situaciones.js": {
+   "huella": "46531cec8e83a3ac92798a53229635f450fd96cd",
+   "cuando": "2026-10-29T17:47:39.152Z",
+   "seg": 11.9,
+   "ultima": "test_situaciones: OK",
+   "tras": false
+  },
+  "test_meter_v7.js": {
+   "huella": "b57330a37cc84d2465832cb73b40fbda3b8b2752",
+   "cuando": "2026-10-29T18:01:09.664Z",
+   "seg": 13.3,
+   "ultima": "✓ medidor v7: 10 comprobaciones correctas",
+   "tras": false
+  },
+  "test_acusar_razones.js": {
+   "huella": "52dc0090e09367014040a3ab319834bce2854548",
+   "cuando": "2026-10-29T20:34:28.766Z",
+   "seg": 2.8,
+   "ultima": "casos v7 30 · huecos motivo bloqueados 60 · método 30 · comprobaciones 1617 · fallos 0",
+   "tras": false
+  },
+  "test_cl5a.js": {
+   "huella": "b0b44d6dbd1c17696c35d9738b11201f4ebfb5bb",
+   "cuando": "2026-10-29T20:34:40.241Z",
+   "seg": 11.5,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_puzles_cl5c.js": {
+   "huella": "e26ef1d2d8dc555fea7566edfb3de9eb56199ccb",
+   "cuando": "2026-10-29T20:37:30.124Z",
+   "seg": 169.9,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_validador_puzles.js": {
+   "huella": "4d71462531e2a06889f835b430720dfa365eb19a",
+   "cuando": "2026-10-29T20:37:40.740Z",
+   "seg": 10.6,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_puzles_revisor.js": {
+   "huella": "33974784b3802f88c77ef8d331572936c52d393f",
+   "cuando": "2026-10-29T20:38:23.526Z",
+   "seg": 42.8,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_uv_c4.js": {
+   "huella": "48dc89793116fa848d59b69a2080b8503782f149",
+   "cuando": "2026-10-29T20:49:40.207Z",
+   "seg": 90.2,
+   "ultima": "Todo en orden (40 comprobaciones)",
+   "tras": false
+  },
+  "test_grab4.js": {
+   "huella": "fb124df7d3f9278ae870b9bd9a386bebe82d3f44",
+   "cuando": "2026-10-29T20:50:49.440Z",
+   "seg": 21.5,
+   "ultima": "✓ GRAB-4: 13 comprobaciones correctas y 3 mutaciones detectadas",
+   "tras": false
+  },
+  "test_charla_datos.js": {
+   "huella": "19aea3798ffbe94c2e86047705628f9918679299",
+   "cuando": "2026-10-29T20:50:49.554Z",
+   "seg": 0.1,
+   "ultima": "✓ test_charla_datos: 7 comprobaciones",
+   "tras": false
+  },
+  "test_charla_senuelo_a.js": {
+   "huella": "577a30bf7537a9459561b51bbdab896229afc28a",
+   "cuando": "2026-10-29T20:50:59.282Z",
+   "seg": 9.7,
+   "ultima": "✓ test_charla_senuelo_a: 9 comprobaciones",
+   "tras": false
+  },
+  "test_charla_senuelo_b.js": {
+   "huella": "ac84d70c9af5c11bb629e2464c22e76363e53f09",
+   "cuando": "2026-10-29T20:51:49.840Z",
+   "seg": 50.6,
+   "ultima": "✓ test_charla_senuelo_b: 11 comprobaciones",
+   "tras": false
+  },
+  "test_grab_reac.js": {
+   "huella": "57a348d8632f621038c42f093ccc7aa38e46b259",
+   "cuando": "2026-10-29T20:52:14.371Z",
+   "seg": 24.5,
+   "ultima": "✓ 2305 comprobaciones OK",
+   "tras": false
+  },
+  "test_refuta_charla.js": {
+   "huella": "ba4d8b6d60f6b779ed450451018876ccff07aac5",
+   "cuando": "2026-10-29T20:53:07.041Z",
+   "seg": 52.7,
+   "ultima": "✓ test_refuta_charla: 12 comprobaciones",
+   "tras": false
+  },
+  "test_balancea_lali.js": {
+   "huella": "810a86b6f757fc385b60880313136ec0147e4be3",
+   "cuando": "2026-10-29T20:53:17.446Z",
+   "seg": 10.4,
+   "ultima": "✓ test_balancea_lali: 7 comprobaciones",
+   "tras": false
+  },
+  "test_tiempos1.js": {
+   "huella": "3e8c53b51aa3376c12726737833090a6527143d1",
+   "cuando": "2026-10-29T20:53:18.693Z",
+   "seg": 1.2,
+   "ultima": "✓ test_tiempos1: 71 comprobaciones",
+   "tras": false
+  },
+  "test_tiempos2.js": {
+   "huella": "dee4c5260d51e647d484c1ff49fc8d8ceeaf6118",
+   "cuando": "2026-10-29T20:53:23.084Z",
+   "seg": 4.4,
+   "ultima": "✓ test_tiempos2: 153 comprobaciones",
+   "tras": false
+  },
+  "test_duracion_puzles.js": {
+   "huella": "e0671be2ab73ff5895210d89103b91fdbef1ef1d",
+   "cuando": "2026-10-29T20:53:38.544Z",
+   "seg": 15.5,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "test_intro.js": {
+   "huella": "27e17d4ea541ae0080414369e090ccea0e25dc19",
+   "cuando": "2026-10-29T20:56:52.679Z",
+   "seg": 17.7,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/intro_browser_test.js": {
+   "huella": "71d2c8a94223580a7bb63fbfad3ffbea41a8edf2",
+   "cuando": "2026-10-29T20:57:17.682Z",
+   "seg": 25,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/smoke.js": {
+   "huella": "1fea6431fbb0e6088931f172cde508f943398bbd",
+   "cuando": "2026-10-29T20:59:59.501Z",
+   "seg": 3.1,
+   "ultima": "logs []",
+   "tras": false
+  },
+  "tools/gen_browser_test.js": {
+   "huella": "2d4d4647d9ea3813f5452861c07b64bd0fcd3dfe",
+   "cuando": "2026-10-29T21:00:05.901Z",
+   "seg": 6.4,
+   "ultima": "artifact logs []",
+   "tras": false
+  },
+  "tools/anim_browser_test.js": {
+   "huella": "33b18e20fdfd64c109a467e587a2e214862caf72",
+   "cuando": "2026-10-29T21:00:25.673Z",
+   "seg": 19.7,
+   "ultima": "animación en navegador OK",
+   "tras": false
+  },
+  "tools/codigo_browser_test.js": {
+   "huella": "d95fb1eeb13927e4a2d280a49ee172c4ec28c4fc",
+   "cuando": "2026-10-29T21:00:37.948Z",
+   "seg": 12.2,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/pruebas_browser_test.js": {
+   "huella": "42dcb064352ee3ef07b826d3c926a9f1da6c9099",
+   "cuando": "2026-10-29T21:00:50.268Z",
+   "seg": 12.3,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/hud_sala_browser_test.js": {
+   "huella": "0b50df2034521e677ae122a4734d7e8cd86a3270",
+   "cuando": "2026-10-29T21:01:03.689Z",
+   "seg": 13.4,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/franjas_browser_test.js": {
+   "huella": "c41d0bf29632692e8aea42488c3ee96b88a7d1c1",
+   "cuando": "2026-10-29T21:01:44.517Z",
+   "seg": 40.8,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/burbujas_browser_test.js": {
+   "huella": "5455c3c7d0c5ea4c8e9555d2f25206f9b7c06034",
+   "cuando": "2026-10-29T21:02:08.048Z",
+   "seg": 23.5,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/rotar_browser_test.js": {
+   "huella": "3d2f83bee4172dd071696acddd292c39b07f760c",
+   "cuando": "2026-10-29T21:03:20.677Z",
+   "seg": 72.6,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/touch_stress_browser_test.js": {
+   "huella": "1b479e7c87a3bd98acf8c10e045d77fc1fa44428",
+   "cuando": "2026-10-29T21:03:51.498Z",
+   "seg": 30.8,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/touch_dialog_browser_test.js": {
+   "huella": "d163a2f193b1039bdff6a1bf178c9f12aa021500",
+   "cuando": "2026-10-29T21:04:04.452Z",
+   "seg": 12.9,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/touch_multi_browser_test.js": {
+   "huella": "66394363053f0c486dbc0690977747690f68f346",
+   "cuando": "2026-10-29T21:04:12.594Z",
+   "seg": 8.1,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/touch_stuck_browser_test.js": {
+   "huella": "021b68e137865c18a567a08bb2306cb4206d213c",
+   "cuando": "2026-10-29T21:04:20.912Z",
+   "seg": 8.3,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/diag_browser_test.js": {
+   "huella": "98343c4e1b6833ce73cf75803958baf03ed67c55",
+   "cuando": "2026-10-29T21:04:40.346Z",
+   "seg": 19.4,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/accuse_browser_test.js": {
+   "huella": "7b8cb8eed93ed79e3ec3ab2c915c4335fbfd95a4",
+   "cuando": "2026-10-29T21:04:53.442Z",
+   "seg": 13.1,
+   "ultima": "Todo en orden",
+   "tras": false
+  },
+  "tools/atmos_browser_test.js": {
+   "huella": "ec07aa4a2fed60c833c94e936955cb3f79b9a0d7",
+   "cuando": "2026-10-29T21:05:58.682Z",
+   "seg": 65.2,
+   "ultima": "atmósfera en navegador OK",
+   "tras": false
+  },
+  "tools/ally_browser_test.js": {
+   "huella": "c50972dc7e7822cc0ee1931d74a39b0f76d42038",
+   "cuando": "2026-10-29T21:06:47.717Z",
+   "seg": 49,
+   "ultima": "escenas con aliado en navegador OK",
+   "tras": false
+  },
+  "tools/stealth_test.js": {
+   "huella": "bd3dc50b800eb50b487d51b53c01c1085ae14e68",
+   "cuando": "2026-10-29T21:07:09.455Z",
+   "seg": 21.7,
+   "ultima": "hard grabación conseguida: true intentos 1 errores []",
+   "tras": false
+  },
+  "tools/online_test.js": {
+   "huella": "ca0c953c6386ed75837df2f090781bca5d01f008",
+   "cuando": "2026-11-14T01:47:10.974Z",
+   "seg": 25.2,
+   "ultima": "logs []",
+   "tras": false
+  },
+  "tools/doors_test.js": {
+   "huella": "057df39935f1fdb3c28e27de5ba3b2e66e6962b0",
+   "cuando": "2026-10-29T21:07:37.457Z",
+   "seg": 3.4,
+   "ultima": "errores [] logs []",
+   "tras": false
+  },
+  "tools/rejoin_test.js": {
+   "huella": "2630a6cc6eb1b97eb385f009df53282cac050bca",
+   "cuando": "2026-11-14T01:47:24.515Z",
+   "seg": 13.5,
+   "ultima": "A reenlazado true | B reenlazado true | logs []",
+   "tras": false
+  },
+  "tools/peer_test.js": {
+   "huella": "5ecf06d65835883f3d294e7354ab29dfe66e36ba",
+   "cuando": "2026-11-14T01:47:39.816Z",
+   "seg": 15.2,
+   "ultima": "A: IA al mando true | logs []",
+   "tras": false
+  },
+  "tools/relay_browser_test.js": {
+   "huella": "96e28bafd7af111989743e41de0026c9dc464264",
+   "cuando": "2026-10-29T21:10:29.425Z",
+   "seg": 13.5,
+   "ultima": "logs []",
+   "tras": false
+  },
+  "tools/touch_online_test.js": {
+   "huella": "48ea13b2ec08a0d248a9b1a37e9a57c966fda698",
+   "cuando": "2026-11-14T01:47:47.765Z",
+   "seg": 7.8,
+   "ultima": "solo: x antes 552 después 728 | MUEVE true | logs []",
+   "tras": false
+  }
+ }
+}

@@ -1,0 +1,7 @@
+INFORME c4 · 2b-4 PASO 3 · REMEDIR 150/NIVEL (cp. 235, 25 oct, LOW, sin tocar src/). ESTADO: NO CERRADO. GEN_VERSION 6 (v7 en memoria).
+1) MEDIDO (150 casos/nivel, GENV=7, estado de disco con señuelos encendidos; herramienta × nivel, pasos por caso, F · N · D) y BANDA:
+   lupa 1,80 · 2,07 · 2,04 (1,7-2,2) OK | ganzúa 1,30 · 1,40 · 1,40 (1,0-1,5) OK | UV 2,13 · 2,19 · 2,35 (1,7-2,3) Difícil POR ENCIMA | grabadora 1,00 · 1,06 · 1,00 (1,0-1,5) en el mínimo, sin margen.
+   Cadenas real/señuelo 0,37/0,25 · 0,43/0,42 · 0,61/0,45. Oli 49,8 · 51,5 · 50,6 % pasos, ≈ 50 % tiempo, 0 fuera de banda. Bot 150/150.
+2) DURACIÓN Y CALIDAD: Fácil 22,4–25,1–28,0 · 74/81,9/89 · Normal 27,3–32,6–37,7 · 73/78,8/87 · Difícil 34,7–38,4–42,3 · 70/77,5/84. >45: 0 · atascos 0 · aceptados 150/150.
+3) freeLupa (Oli > 1,5 × Lali): sin la regla la lupa sube 1,80→1,85 · 2,07→2,18 · 2,04→2,09. Se deja como está.
+4) PENDIENTE (paso 3b, MEDIUM, solo datos): UV señuelo Difícil [[0,50],[1,50]] → ≈ [[0,60],[1,40]]; margen de grabadora (Fácil y Difícil) y remedir ≥ 150. Después cerrar 2b-4 y pasar a 2b-5 (LOW: mutación, pesadas y build).

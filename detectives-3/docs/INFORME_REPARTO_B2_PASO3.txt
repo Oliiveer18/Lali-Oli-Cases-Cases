@@ -1,0 +1,35 @@
+=== Reparto de herramientas · 300 casos generados (0 sin generar), semillas i*7919+1 ===
+Herramienta   pasos   %pasos  segundos  casos con ≥1   dueño
+lupa            300     26%       390       100%      rex
+ganzua          300     26%       600       100%      rex
+uv              292     25%       292        97%      luna
+grabadora       281     24%      1349        94%      luna
+coop (empujar, 2 detectives): 140 pasos · puertas con herramienta: 0 · objetos con «listen»: 281
+
+TRABAJO OBLIGADO POR DETECTIVE (pasos con herramienta, sin coop):
+  Oli  (rex):  600 pasos · 990 s
+  Lali (luna): 573 pasos · 1641 s
+  Reparto Oli/Lali: 51/49 en número · 38/62 en tiempo (meta 40-60)
+  Casos con algún detective fuera de 40-60 (número o tiempo): 300 de 300 (100 %)
+
+OBJETOS SIN HERRAMIENTA (todos los objetos visibles con pasos sin tool; NO es la cifra de EQ-6): pistas 2806 · curiosidades 5038 · situaciones 111 · otros 0
+
+PISTAS DE SOSTÉN (denominador de EQ-6: objetos con role prueba, descarte o refuta; sin curiosidades, situaciones, señuelos ni testimonios): 2388 en 300 casos (≈ 8.0 por caso)
+  LIBRES (sin herramienta): 1709 = 72 % (meta ~25 %) · con sigilo (vigilante, sin herramienta): 45 = 2 % · con herramienta: 634 = 27 % (lupa 77, ganzua 156, uv 139, grabadora 262)
+  %libre por caso: mín 38 · mediana 71 · máx 100  (ninguna pista de sostén con herramienta en 3 casos)
+  Aparte (no entran): señuelos con objeto 1712 (1192 libres) · pistas que cuenta un personaje 1013 · pistas sin objeto en def 0
+
+POR CAPÍTULO (chapterMin del objeto; 1 si no lo dice):
+  Cap. 1: Oli 600 pasos/990 s · Lali 292 pasos/292 s → 67/33 en número
+  Cap. 2: Oli 0 pasos/0 s · Lali 281 pasos/1349 s → 0/100 en número
+
+CASO 1 (reservado): Oli 8 pasos/12 s · Lali 3 pasos/5 s · herramientas lupa 6, ganzua 1, uv 2, grabadora 1 · coop 1 · listen 1
+
+%Oli por caso (número): mín 50 · mediana 50 · máx 67
+
+VOZ (quién habla en el cartel de cada paso; DESPUÉS de b1): clase → Oli / Lali
+  charla grabada (con herramienta)      0 /    281  (0 % Oli)
+  curiosidad                       2594 /   2444  (51 % Oli)
+  pista (con herramienta)           600 /    292  (67 % Oli)
+  pista (libre)                    1508 /   1438  (51 % Oli)
+  situación                          50 /     61  (45 % Oli)

@@ -1,0 +1,7 @@
+INFORME c4-3 · CHARLAS SEÑUELO · SUBPASO 2/4 (cp. 241, 26 oct, MEDIUM, DATOS APAGADOS). Solo `src/gen_data.js` · GEN_VERSION 6 y v7 IDÉNTICOS · G.VERSION 0.7.60.
+Decisiones del usuario (26 oct): A banda de grabadora 1,0-2,0 · B tono sospechoso en parte de las charlas reales · C cifras 45/55/60 %.
+1) Tabla `herr2.senuelos[nivel].charla` = nº de charlas señuelo por caso [[0|1, peso]]: Fácil [[0,55],[1,45]] · Normal [[0,45],[1,55]] · Difícil [[0,40],[1,60]] (máx. 1 por caso; con la factibilidad medida en 1/4, ≈ 0,31 · 0,46 · 0,50 por caso).
+2) Interruptor `herr2.charlaSenuelos: false`. `herr2.bandas` = bandas por caso confirmadas (lupa 1,7-2,2 · ganzúa 1,0-1,5 · UV 1,7-2,3 · grabadora 1,0-2,0); documentan, nada del generador las lee.
+3) Textos: `listen.veil.senuelo` (5 pares [3.ª frase de a, 4.ª de b], tono sospechoso sobre {who}; sin pronombres de género, sin lugares ni confesión). Plantilla `tracesGrab` (refutación real entregada como grabación, mismo título «Foto de la cámara» que el descarte, para no delatarse).
+4) Pruebas: test_charla_datos.js (7 comprobaciones, 3 mutaciones: sin tabla de Normal · interruptor encendido · pronombre de género) · hash SHA-1 de 60 casos/nivel en v6 y en v7 idéntico antes y después · casos_sin_cambios 60 (v6) IDÉNTICO · test_gen_clues · test_grabadora · test_compile · test_grab4 · build + test_build 14/14.
+5) Sigue 3/4 (código apagado). La banda nueva de la grabadora y las cifras solo se miden en 4/4.

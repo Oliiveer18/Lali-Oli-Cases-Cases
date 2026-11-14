@@ -1,0 +1,158 @@
+INFORME CL-1 · CASO LIBRE Y ACUSACIÓN POR RAZONES · DIAGNÓSTICO DE SOLO LECTURA
+25 oct 2026 · v0.7.60 · medido con GEN_VERSION 7 en memoria (la constante del repositorio sigue en 6) · esfuerzo LOW
+`src/`, pruebas (`test_*.js`) y las herramientas anteriores de `tools/` SIN CAMBIOS. Única novedad: `tools/caso_libre_cl1.js` (solo mide).
+Reproducir: `GENV=7 node tools/caso_libre_cl1.js 200` (≈ 40 s; escribe /tmp/caso_libre_cl1.txt). Fuente de diseño: docs/CASO_LIBRE_Y_ACUSACION.md §2, §5 y §7.
+
+=====================================================================================
+A. DÓNDE SE USAN LOS CAPÍTULOS Y `chapterMin` (grep -n + sed -n por rangos; gen_data.js: 0 usos)
+=====================================================================================
+Tres tipos de uso: (1) CERROJO real (algo no se puede hacer hasta el capítulo N), (2) MEDICIÓN o REPARTO por capítulo (informan, no bloquean), (3) GUION/TEXTO.
+
+A.1 Datos y esquema
+- src/schema.js:42 (`chapterMin`/`chapterMax` en condiciones), :63 (`visible.chapterMin` de un objeto), :69 (`locked.chapterMin` de una puerta) = FORMATO del caso. :296 avisa si el último capítulo no tiene objetivo `case_closed`; :357 comprueba que un objeto con `chapterMin` sea alcanzable (capítulo ≥ chapterMin y ≤ nº de capítulos); :376 que `locked.chapterMin` exista.
+- src/logic.js:310-311 `evalCond` con `chapterMin`/`chapterMax` (condiciones de visibilidad; las usa el caso 1).
+
+A.2 Generador (`src/compile.js`, solo casos generados)
+- :665-668 define SIEMPRE tres capítulos: 1 «Pistas» (≥ 60 % de las pistas físicas), 2 «Interrogatorio» (hablar con todos, escuchar a los testigos, charlas grabadas g2c en v7), 3 «Acusar» (objetivo g3 con la bandera `case_closed`).
+- :436 la lupa del cap. 2 se marca `pr.chapterMin = 2` (cerrojo: solo se puede usar desde el cap. 2); :365 y :382 las charlas grabadas (`rec_charla`) llevan `chapterMin: 2`; :336-393 los personajes charlan en el «rincón de charla» durante el cap. 2 (`placement` con `ch: 2`) y vuelven a su sitio en el cap. 3.
+- :443 el reparto EQ-1 se agrupa por capítulo (en v7 `H2` lo agrupa en uno solo: «caso entero», cp. 177); :422-448 reparto por capítulo en v6; :641-645 mínimos del objetivo g1/g2c que dependen del capítulo.
+
+A.3 Motor (`src/logic.js`, `src/world.js`)
+- logic.js:328 `this.chapter = 1`; :368 `chapterDef()`; :382-390 `checkAdvance()` = el capítulo avanza SOLO cuando todos sus objetivos están cumplidos (se llama desde startTalk, ask y acusar).
+- CERROJOS de puertas: logic.js:531, :556, :559 (puerta bloqueada hasta `locked.chapterMin`; aviso de ganzúa), :925; world.js:322 (estado «wait» de una puerta). CERROJO de objetos: logic.js:916 (simulación del validador) y los de `visible`.
+- logic.js:399 `placementOf()`: la colocación de personajes depende del capítulo (`placement[id][].ch`); world.js:254-257 recoloca a los personajes al cambiar de capítulo (`chPlaced`).
+- logic.js:587 pista de ayuda «Creo que ya tenemos suficiente: ¡abrid el cuaderno y acusad!»: solo sale cuando `chapter >= nº de capítulos` (el último). ÚNICO sitio donde «el capítulo» condiciona la acusación.
+- `accuse()`/`boardOptions()` (logic.js:598-650) y la pantalla Acusar (play.js) NO miran el capítulo (verificado: `grep` de `chapter` en play.js = solo guardado :11, recuperación :823 y tarjetas de capítulo :973-974, :1190).
+- logic.js:629 `setFlag('case_closed')` al acertar. logic.js:786-967 validador (`validateCase`): simula la partida con todos los capítulos (:904-962, exige llegar al último capítulo :947) y comprueba `needs` (:883, :949).
+
+A.4 Bot, compañero IA, medidor, revisor, calidad
+- src/bot.js:63 y :142: la puerta/objeto esperan al capítulo (`doorState` = 'wait'); :109-135 `tick()` va contando capítulos y suma la lectura de `outro`/`intro`; :118 `perChapter` (informa); :260 el atasco se describe por capítulo. El bot SOLO acusa cuando `nextAction()` devuelve «accuse», es decir en el último capítulo (logic.js:587).
+- src/companion.js:195: el compañero IA no toca un objeto con `chapterMin` mayor que el capítulo actual.
+- src/review.js:86-91 (revisor): llama a `G.workIssues(def)` = EQ-1 por caso y por capítulo con trabajo (logic.js:110-128; capítulo de un objeto = `chapterMin || 1`, de una puerta = `locked.chapterMin || 1`). logic.js:129 `G.idleChapters` y :134 `G.idleOf` = EQ-7 (tiempo muerto por capítulo; el bot lo alimenta desde bot.js:35-37).
+- src/meter.js:68 (medidor): usa `G.workShare` (reparto, que se calcula con `chapterMin`); NO tiene capítulos propios.
+- src/quality.js:127-131: avisos `capitulo_largo`/`capitulo_corto` por reparto del tiempo. OJO: aquí `Q.chapterMin: 0.08` es un UMBRAL de porcentaje, NO el `chapterMin` de los objetos (mismo nombre, otra cosa).
+
+A.5 Caso 1 (hecho a mano; NO se toca hasta Z0, P17)
+- src/case1.js:129 objetivo `case_closed` (g9) · :170 `visible: { chapterMin: 3 }` · :243 y :247 puertas con `locked.chapterMin: 2` (almacén y puerta trasera) con textos de «todavía no».
+
+A.6 Textos y pantallas
+- play.js:1190 cabecera «Cap. N · título»; :973-974 tarjetas outro/intro al cambiar de capítulo; scenes.js:185 «Continuar caso · cap. N». Textos de objetivos de capítulo en compile.js:665-668 («Busca pistas», «Habla con todos», «Acusa»). `G.caseBriefing`/tutorial: se componen con el nivel, no con el capítulo.
+
+A.7 Herramientas y pruebas que nombran capítulos (hay que revisarlas en CL-4)
+- tools/: baseline.js, cola_duracion.js, dbg2.js, flow4.js, flow6.js, ia_iniciativa.js, puertas_masa.js, reparto_herramientas.js, spike_compilador.js, stealth_test.js, unit_test.js (y la nueva caso_libre_cl1.js, que solo lee `chapter`).
+- Pruebas raíz: test_anim, test_bible, test_bot, test_charlas, test_companion, test_filler, test_g2c, test_grabadora, test_macabro, test_mech, test_mood, test_reparto, test_validate, test_watcher.
+- Resumen de CERROJOS reales que habría que convertir en dependencias (CL-4): puertas con `locked.chapterMin` (caso 1 y lupa/charlas del generador), objetos con `chapterMin: 2` (lupa del cap. 2 y charlas grabadas), `placement` por capítulo (charlas de rincón), pista «acusad» (último capítulo), validador/bot/compañero IA que esperan al capítulo.
+
+=====================================================================================
+B. MEDICIÓN: 200 casos por nivel (nivel forzado, semillas i*7919+1, GEN_VERSION 7)
+=====================================================================================
+Cómo se mide (sin tocar el juego): el bot juega cada caso; un parche EN MEMORIA de bot.js solo expone su reloj `t` y tres ganchos de solo lectura (addClue, startTalk, checkAdvance) anotan en qué momento llega cada pista, se habla con el culpable y se abre cada capítulo. Comprobado a mano contra el log del bot (instante idéntico).
+Definiciones: «razón» del culpable = existe una pista con `sus[culpable] > 0` (la señala; P13 endurecido). Razón de motivo/método = todas las `needs` de la opción verdadera. «Minuto» = minuto humano del bot (segundos × 1,7 / 60), igual que bot_masa. «Se podría acusar» = minuto en que ya se tienen TODAS las razones del nivel.
+
+=== CL-1 · caso libre · 200 semillas POR NIVEL (i*7919+1, nivel forzado) · GEN_VERSION 7 · minutos humanos (×1.7) ===
+
+##### FACIL · generados 200 (errores 0) · partidas del bot ganadas 200 (atascos 0, sin ganar 0)
+[1] NEEDS de la opción VERDADERA (en la biblia final, tras el generador completo)
+  método : relleno 200 de 200 (100 %) · pistas existen 200 de 200 (100 %) · TODAS alcanzadas por el bot 200 de 200 (100 %) · nº de pistas media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · origen objeto 200 / testimonio 0
+  motivo : relleno 200 de 200 (100 %) · pistas existen 200 de 200 (100 %) · TODAS alcanzadas por el bot 200 de 200 (100 %) · nº de pistas media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · origen objeto 200 / testimonio 0
+  método y motivo comparten alguna pista en 0 de 200 (0 %) casos
+  opciones FALSAS (señuelos) de método y motivo: 800 · con needs 706 de 800 (88 %) · de ellas alcanzadas 706 de 706 (100 %) · nº de pistas media 1.26 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 2.00 · máx 3.00
+[2] PISTAS POR RAZÓN (por caso)
+  pistas totales media 15.1 · mín 11.0 · p10 12.0 · mediana 15.0 · p90 18.0 · máx 19.0 · «clave» (proof) media 3.59 · mín 3.00 · p10 3.00 · mediana 4.00 · p90 4.00 · máx 4.00
+  que SEÑALAN al culpable (sus[culpable] > 0): media 4.73 · mín 4.00 · p10 4.00 · mediana 5.00 · p90 5.00 · máx 5.00 · de ellas «clave»: media 3.59 · puntos de la pista: media 3.96
+  que lo señalan o lo descartan (lo que hoy abre el candado): media 4.73 · mín 4.00 · p10 4.00 · mediana 5.00 · p90 5.00 · máx 5.00
+  método: media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · motivo: media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00
+  por rol en la biblia: prueba 4.73 · descarte 4.04 · falsa 4.88 · refuta 1.42 · ambiente 0.00
+[3] P13 · pista que señale al culpable
+  casos SIN ninguna pista que señale al culpable: 0 de 200 (0 %) · sin pista que lo señale NI descarte: 0 de 200 (0 %) · con señal, pero el bot no llegó a ninguna: 0 de 200 (0 %)
+  casos cuyas señales NO son de rol «prueba» (solo ambiente/otras): 0 de 200 (0 %)
+[4] MINUTO de la partida en que se tienen las razones (cuándo se PODRÍA acusar)
+  hablar con el culpable por 1.ª vez: media 3.6 · mín 1.5 · p10 2.7 · mediana 3.6 · p90 4.6 · máx 5.8
+  culpable HOY (hablado o pista lo señala/descarta): media 0.6 · mín 0.2 · p10 0.2 · mediana 0.4 · p90 1.3 · máx 5.3 · el candado de hoy se abre ANTES que el de P13 en 2 de 200 (1 %) casos
+  culpable P13 (1.ª pista que lo señala): media 0.6 · mín 0.2 · p10 0.2 · mediana 0.4 · p90 1.3 · máx 5.8
+  2.ª pista que señala al culpable: media 1.7 · mín 0.4 · p10 0.6 · mediana 1.4 · p90 4.0 · máx 6.7 · 3.ª: media 3.6 · mín 0.7 · p10 1.4 · mediana 3.9 · p90 5.7 · máx 6.9  (por si P13 pidiera ≥ 2 ó ≥ 3 señales)
+  motivo (todas sus needs): media 2.3 · mín 0.2 · p10 0.2 · mediana 1.5 · p90 5.6 · máx 7.3
+  método (todas sus needs): media 2.2 · mín 0.2 · p10 0.2 · mediana 1.4 · p90 5.3 · máx 6.7
+  se abre el capítulo 2: media 2.1 · mín 0.9 · p10 1.5 · mediana 2.1 · p90 2.7 · máx 3.4 · se abre el capítulo 3 («Acusar»): media 17.3 · mín 10.3 · p10 14.0 · mediana 16.8 · p90 20.9 · máx 23.9 · FINAL de la partida del bot: media 24.6 · mín 21.6 · p10 23.4 · mediana 24.6 · p90 25.8 · máx 27.5
+  >>> NIVEL FACIL (culpable): se PODRÍA acusar en el minuto media 0.6 · mín 0.2 · p10 0.2 · mediana 0.4 · p90 1.3 · máx 5.8
+      como % de la partida: media 2 · mín 1 · p10 1 · mediana 2 · p90 5 · máx 24 · minutos ANTES de que el capítulo 3 lo permita hoy: media 16.7 · mín 8.7 · p10 13.4 · mediana 16.3 · p90 20.5 · máx 23.6 · antes del cap. 3 en 200 de 200 (100 %) casos · sin dato (razón no alcanzada) en 0
+      (referencia, si este nivel pidiera lo de normal: minuto 2.3 de media, 9 % de la partida)
+      (referencia, si este nivel pidiera lo de dificil: minuto 3.4 de media, 14 % de la partida)
+
+##### NORMAL · generados 200 (errores 0) · partidas del bot ganadas 200 (atascos 0, sin ganar 0)
+[1] NEEDS de la opción VERDADERA (en la biblia final, tras el generador completo)
+  método : relleno 200 de 200 (100 %) · pistas existen 200 de 200 (100 %) · TODAS alcanzadas por el bot 200 de 200 (100 %) · nº de pistas media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · origen objeto 200 / testimonio 0
+  motivo : relleno 200 de 200 (100 %) · pistas existen 200 de 200 (100 %) · TODAS alcanzadas por el bot 200 de 200 (100 %) · nº de pistas media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · origen objeto 200 / testimonio 0
+  método y motivo comparten alguna pista en 0 de 200 (0 %) casos
+  opciones FALSAS (señuelos) de método y motivo: 800 · con needs 761 de 800 (95 %) · de ellas alcanzadas 761 de 761 (100 %) · nº de pistas media 1.53 · mín 1.00 · p10 1.00 · mediana 2.00 · p90 2.00 · máx 3.00
+[2] PISTAS POR RAZÓN (por caso)
+  pistas totales media 17.8 · mín 15.0 · p10 16.0 · mediana 18.0 · p90 20.0 · máx 21.0 · «clave» (proof) media 3.69 · mín 3.00 · p10 3.00 · mediana 4.00 · p90 4.00 · máx 4.00
+  que SEÑALAN al culpable (sus[culpable] > 0): media 4.70 · mín 4.00 · p10 4.00 · mediana 5.00 · p90 5.00 · máx 5.00 · de ellas «clave»: media 3.69 · puntos de la pista: media 3.93
+  que lo señalan o lo descartan (lo que hoy abre el candado): media 4.70 · mín 4.00 · p10 4.00 · mediana 5.00 · p90 5.00 · máx 5.00
+  método: media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · motivo: media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00
+  por rol en la biblia: prueba 4.70 · descarte 4.30 · falsa 7.38 · refuta 1.47 · ambiente 0.00
+[3] P13 · pista que señale al culpable
+  casos SIN ninguna pista que señale al culpable: 0 de 200 (0 %) · sin pista que lo señale NI descarte: 0 de 200 (0 %) · con señal, pero el bot no llegó a ninguna: 0 de 200 (0 %)
+  casos cuyas señales NO son de rol «prueba» (solo ambiente/otras): 0 de 200 (0 %)
+[4] MINUTO de la partida en que se tienen las razones (cuándo se PODRÍA acusar)
+  hablar con el culpable por 1.ª vez: media 4.4 · mín 2.4 · p10 3.2 · mediana 4.5 · p90 5.7 · máx 6.7
+  culpable HOY (hablado o pista lo señala/descarta): media 0.7 · mín 0.2 · p10 0.2 · mediana 0.4 · p90 1.5 · máx 3.4 · el candado de hoy se abre ANTES que el de P13 en 1 de 200 (1 %) casos
+  culpable P13 (1.ª pista que lo señala): media 0.7 · mín 0.2 · p10 0.2 · mediana 0.4 · p90 1.5 · máx 5.1
+  2.ª pista que señala al culpable: media 2.0 · mín 0.3 · p10 0.6 · mediana 1.7 · p90 4.0 · máx 7.9 · 3.ª: media 4.0 · mín 0.7 · p10 1.4 · mediana 3.4 · p90 6.8 · máx 8.1  (por si P13 pidiera ≥ 2 ó ≥ 3 señales)
+  motivo (todas sus needs): media 2.5 · mín 0.2 · p10 0.2 · mediana 1.6 · p90 6.2 · máx 8.1
+  método (todas sus needs): media 2.5 · mín 0.2 · p10 0.2 · mediana 1.7 · p90 6.1 · máx 7.9
+  se abre el capítulo 2: media 2.7 · mín 1.3 · p10 2.1 · mediana 2.6 · p90 3.3 · máx 4.4 · se abre el capítulo 3 («Acusar»): media 20.5 · mín 13.9 · p10 16.7 · mediana 20.2 · p90 24.5 · máx 27.6 · FINAL de la partida del bot: media 28.6 · mín 25.0 · p10 27.0 · mediana 28.5 · p90 30.1 · máx 31.6
+  >>> NIVEL NORMAL (culpable + motivo): se PODRÍA acusar en el minuto media 2.5 · mín 0.2 · p10 0.2 · mediana 1.6 · p90 6.2 · máx 8.1
+      como % de la partida: media 9 · mín 1 · p10 1 · mediana 6 · p90 22 · máx 28 · minutos ANTES de que el capítulo 3 lo permita hoy: media 18.0 · mín 7.4 · p10 13.8 · mediana 17.9 · p90 22.5 · máx 26.0 · antes del cap. 3 en 200 de 200 (100 %) casos · sin dato (razón no alcanzada) en 0
+      (referencia, si este nivel pidiera lo de facil: minuto 0.7 de media, 3 % de la partida)
+      (referencia, si este nivel pidiera lo de dificil: minuto 3.8 de media, 13 % de la partida)
+
+##### DIFICIL · generados 200 (errores 0) · partidas del bot ganadas 200 (atascos 0, sin ganar 0)
+[1] NEEDS de la opción VERDADERA (en la biblia final, tras el generador completo)
+  método : relleno 200 de 200 (100 %) · pistas existen 200 de 200 (100 %) · TODAS alcanzadas por el bot 200 de 200 (100 %) · nº de pistas media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · origen objeto 200 / testimonio 0
+  motivo : relleno 200 de 200 (100 %) · pistas existen 200 de 200 (100 %) · TODAS alcanzadas por el bot 200 de 200 (100 %) · nº de pistas media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · origen objeto 200 / testimonio 0
+  método y motivo comparten alguna pista en 0 de 200 (0 %) casos
+  opciones FALSAS (señuelos) de método y motivo: 800 · con needs 800 de 800 (100 %) · de ellas alcanzadas 800 de 800 (100 %) · nº de pistas media 1.90 · mín 1.00 · p10 1.00 · mediana 2.00 · p90 3.00 · máx 4.00
+[2] PISTAS POR RAZÓN (por caso)
+  pistas totales media 21.4 · mín 19.0 · p10 20.0 · mediana 21.0 · p90 23.0 · máx 23.0 · «clave» (proof) media 3.71 · mín 3.00 · p10 3.00 · mediana 4.00 · p90 4.00 · máx 4.00
+  que SEÑALAN al culpable (sus[culpable] > 0): media 4.71 · mín 4.00 · p10 4.00 · mediana 5.00 · p90 5.00 · máx 5.00 · de ellas «clave»: media 3.71 · puntos de la pista: media 3.93
+  que lo señalan o lo descartan (lo que hoy abre el candado): media 4.71 · mín 4.00 · p10 4.00 · mediana 5.00 · p90 5.00 · máx 5.00
+  método: media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00 · motivo: media 1.00 · mín 1.00 · p10 1.00 · mediana 1.00 · p90 1.00 · máx 1.00
+  por rol en la biblia: prueba 4.71 · descarte 5.00 · falsa 10.18 · refuta 1.50 · ambiente 0.00
+[3] P13 · pista que señale al culpable
+  casos SIN ninguna pista que señale al culpable: 0 de 200 (0 %) · sin pista que lo señale NI descarte: 0 de 200 (0 %) · con señal, pero el bot no llegó a ninguna: 0 de 200 (0 %)
+  casos cuyas señales NO son de rol «prueba» (solo ambiente/otras): 0 de 200 (0 %)
+[4] MINUTO de la partida en que se tienen las razones (cuándo se PODRÍA acusar)
+  hablar con el culpable por 1.ª vez: media 5.2 · mín 3.2 · p10 4.1 · mediana 5.2 · p90 6.4 · máx 8.3
+  culpable HOY (hablado o pista lo señala/descarta): media 1.0 · mín 0.2 · p10 0.2 · mediana 0.6 · p90 2.5 · máx 5.4 · el candado de hoy se abre ANTES que el de P13 en 2 de 200 (1 %) casos
+  culpable P13 (1.ª pista que lo señala): media 1.0 · mín 0.2 · p10 0.2 · mediana 0.6 · p90 2.5 · máx 6.0
+  2.ª pista que señala al culpable: media 2.7 · mín 0.4 · p10 0.9 · mediana 2.2 · p90 6.4 · máx 8.8 · 3.ª: media 5.0 · mín 0.9 · p10 2.0 · mediana 5.2 · p90 7.8 · máx 9.9  (por si P13 pidiera ≥ 2 ó ≥ 3 señales)
+  motivo (todas sus needs): media 3.2 · mín 0.2 · p10 0.2 · mediana 2.3 · p90 7.5 · máx 10.1
+  método (todas sus needs): media 3.3 · mín 0.2 · p10 0.2 · mediana 2.4 · p90 7.7 · máx 9.8
+  se abre el capítulo 2: media 3.2 · mín 1.8 · p10 2.6 · mediana 3.2 · p90 3.9 · máx 4.6 · se abre el capítulo 3 («Acusar»): media 22.7 · mín 14.8 · p10 18.6 · mediana 22.7 · p90 26.9 · máx 30.9 · FINAL de la partida del bot: media 31.8 · mín 28.8 · p10 30.3 · mediana 31.7 · p90 33.5 · máx 35.5
+  >>> NIVEL DIFICIL (culpable + motivo + método): se PODRÍA acusar en el minuto media 4.7 · mín 0.4 · p10 1.4 · mediana 4.1 · p90 7.9 · máx 10.1
+      como % de la partida: media 15 · mín 1 · p10 4 · mediana 13 · p90 24 · máx 30 · minutos ANTES de que el capítulo 3 lo permita hoy: media 18.0 · mín 7.4 · p10 12.2 · mediana 18.5 · p90 23.0 · máx 29.1 · antes del cap. 3 en 200 de 200 (100 %) casos · sin dato (razón no alcanzada) en 0
+      (referencia, si este nivel pidiera lo de facil: minuto 1.0 de media, 3 % de la partida)
+      (referencia, si este nivel pidiera lo de normal: minuto 3.2 de media, 10 % de la partida)
+
+=====================================================================================
+C. LECTURA DE LOS RESULTADOS (hechos; las decisiones son del usuario en CL-2)
+=====================================================================================
+1. NEEDS: en los 600 casos (200 por nivel) la opción verdadera de método y de motivo trae SIEMPRE `needs` rellenos, existentes y alcanzados por el bot (100 / 100 / 100 % en Fácil, Normal y Difícil). Cada una lleva EXACTAMENTE 1 pista, siempre de OBJETO (nunca testimonio), y método y motivo nunca comparten pista. Los señuelos (opciones falsas) llevan needs en el 88 % (Fácil), 95 % (Normal) y 100 % (Difícil) de los casos, 1,3 / 1,5 / 1,9 pistas de media, todos alcanzables. Respuesta a la duda del cp. 179 («gen_truth los deja vacíos, ¿se rellenan?»): SÍ, los rellena gen_clues.js:93 y :158; no hay casos con needs vacíos.
+2. P13 (pista que señale al culpable): falta en 0 de 600 casos. Cada caso tiene de 4 a 5 pistas que señalan al culpable (media 4,7 en los tres niveles; 3,6-3,7 de ellas son «clave»), siempre al menos una de rol «prueba». Endurecer P13 NO exige contenido nuevo hoy. El candado de hoy («haberle hablado o pista que lo señala/descarta») se abre ANTES que el de P13 solo en 1-2 casos de cada 200: en la práctica es el mismo momento.
+3. CUÁNDO SE PODRÍA ACUSAR (minuto humano del bot; mediana / p90 / máx; la partida del bot dura 24,6 / 28,5 / 31,7 min de media):
+   - FÁCIL (culpable): mediana 0,4 · p90 1,3 · máx 5,8 (≈ 2 % de la partida, máx 24 %).
+   - NORMAL (culpable + motivo): mediana 1,6 · p90 6,2 · máx 8,1 (≈ 6 %, p90 22 %, máx 28 %).
+   - DIFÍCIL (culpable + motivo + método): mediana 4,1 · p90 7,9 · máx 10,1 (≈ 13 %, p90 24 %, máx 30 %).
+   - HOY el capítulo 3 («Acusar») se abre de media en el minuto 17,3 / 20,5 / 22,7: con razones por pista se podría acusar entre 7 y 29 minutos antes, en el 100 % de los casos de los tres niveles.
+   - Hablar por primera vez con el culpable: minuto 3,6 / 4,4 / 5,2 de media; la primera pista que lo señala llega antes (0,6 / 0,7 / 1,0 de media) porque el bot examina objetos primero.
+   - Si P13 pidiera 2 ó 3 pistas que señalen: la 2.ª llega de media en 1,7 / 2,0 / 2,7 min y la 3.ª en 3,6 / 4,0 / 5,0 min (siempre hay ≥ 4 pistas, así que cabe sin contenido nuevo).
+4. EFECTO EN LA DURACIÓN: las razones se tienen en el 2-15 % de la partida; el 85-98 % de los minutos oficiales (28 / 36 / 45) son interrogatorio, charlas y relleno que ya no serían obligatorios. Con CL-3 y CL-4 la duración deja de estar garantizada por el cerrojo de capítulos: CL-5 tendrá que decidir cómo se mide (P16: partida completa) y qué contenido hace que un jugador quiera seguir.
+5. LÍMITES DE LA MEDIDA (honestos): (a) el bot examina todos los objetos antes de hablar, así que su orden es el más rápido para reunir pistas de objeto; un jugador humano mezclará charlas y tardará más (los minutos son una COTA INFERIOR, no la duración típica de acusar); (b) todas las needs son de objeto y muchas pasan por herramienta (lupa, ganzúa, UV), pero esta medida no separa el tiempo de herramienta; (c) «señala» = `sus > 0` (cualquier peso), sin comparar con otros sospechosos; las pistas falsas apuntan a inocentes y no se cuentan; (d) no se midió el efecto sobre estrellas, recompensa ni sensación de juego.
+6. NO se tocó nada del juego: `src/`, `test*.js`, `build.js` y `dist/` iguales al ZIP de partida (comprobado con diff); los códigos G6-… siguen idénticos por construcción (no se ejecutó casos_sin_cambios porque no hay cambios).
+
+=====================================================================================
+D. DUDAS NUEVAS (copiadas a docs/PREGUNTAS_PENDIENTES.md: P22 y P23)
+=====================================================================================
+P22 · Cada razón (motivo, método) hoy se demuestra con 1 sola pista de objeto, y el culpable con 1 sola pista que lo señale (hay 4-5). ¿Se acepta que en Fácil se pueda acusar a los 0,4 min (mediana) y en Difícil a los 4,1 min? Alternativas: pedir 2 ó 3 señales para el culpable (cabe sin contenido nuevo: min. 4 por caso) · pedir 2 pistas por razón (hay que generar una más) · mezclar objeto y testimonio (cambia el generador).
+P23 · Todas las `needs` son de OBJETO: acusar nunca obligaría a hablar con nadie. Si la partida libre debe seguir pidiendo interrogatorio, hay que decidir si una razón puede pedir al menos un testimonio (cambio de generador, detrás de GEN_VERSION >= 7).
